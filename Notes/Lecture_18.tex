@@ -1,0 +1,43 @@
+\section{Lecture 18 \& 19: Kernel, Range, Eigenvalues}
+\rmk{
+    This lecture covers: 
+    \begin{itemize}
+        \item 6.1 Definition of Linear Transformations
+        \item 6.2 Transformations of $\mathbb{R}^2$
+        \item 6.3 The Kernel and Range of a Linear Transformation
+    \end{itemize}
+}
+
+\subsection{Definition of Linear Transformations}
+\defn{Mapping}{
+    Let $V$ and $W$ be vector spaces. A \textbf{mapping} $T$ from $V$ to $W$ is a rule that assigns to each vector $\vec{v}$ in $V$ precisely one vector $\vec{w} = T(\vec{v})$. We write $T: V \to W$.
+}
+
+\defn{Linear Transformation}{
+    Let $V$ and $W$ be vector spaces over the same field. A mapping $T: V \to W$ is a \textbf{linear transformation} if for all $\vec{v}_1, \vec{v}_2 \in V$ and all scalars $c$:
+    \begin{enumerate}
+        \item $T(\vec{u} + \vec{v}) = T(\vec{u}) + T(\vec{v})$ for all $\vec{u}, \vec{v} \in V$
+        \item $T(c\vec{v}) = cT(\vec{v})$ for all $\vec{v} \in V$
+    \end{enumerate}
+    In the above equations, the operations on the left of the equal signs are the ones defined in the domain $V$ and
+the ones on the right of the equal signs are the ones defined in the codomain $W$.
+}
+
+\thmr{}{}{
+    Let $V, W$ be vector spaces over field $F$. A mapping $T: V \to W$ is a linear transformation if and only if for all $\lambda_1, \lambda_2 \in F$ and all $\vec{v}_1, \vec{v}_2 \in V$:
+    \[
+        T(\lambda_1\vec{v}_1 + \lambda_2\vec{v}_2) = \lambda_1T(\vec{v}_1) + \lambda_2T(\vec{v}_2)
+    \]
+}
+
+\ex{
+    Show $T:P_2 \to P_4$ given by $T(p) = x^2 p(x)$ is linear. 
+}
+
+
+
+
+
+
+
+\newpage
