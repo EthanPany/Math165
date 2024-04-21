@@ -1,4 +1,4 @@
-\section{Lecture 18 \& 19: Kernel, Range, Eigenvalues}
+\section{Lecture 17 \& 18: Linear Transformation, Kernel \& Range}
 \rmk{
     This lecture covers: 
     \begin{itemize}
@@ -9,9 +9,12 @@
 }
 
 \subsection{Definition of Linear Transformations}
+\subsubsection{Definition}
 \defn{Mapping}{
     Let $V$ and $W$ be vector spaces. A \textbf{mapping} $T$ from $V$ to $W$ is a rule that assigns to each vector $\vec{v}$ in $V$ precisely one vector $\vec{w} = T(\vec{v})$. We write $T: V \to W$.
 }
+
+Linear Transformation is a kind of mapping that preserves the operations of vector addition and scalar multiplication.
 
 \defn{Linear Transformation}{
     Let $V$ and $W$ be vector spaces over the same field. A mapping $T: V \to W$ is a \textbf{linear transformation} if for all $\vec{v}_1, \vec{v}_2 \in V$ and all scalars $c$:
@@ -23,6 +26,30 @@
 the ones on the right of the equal signs are the ones defined in the codomain $W$.
 }
 
+\begin{figure}
+    \center
+    \includegraphics[width=0.5\textwidth]{img/Note 25 Mar 2024.jpeg}
+    \caption{Linear Transformation Diagram}
+\end{figure}
+\subsection{How to prove a transformation is linear}
+
+\ex{
+    Show $T:P_2 \to P_4$ given by $T(p) = x^2 p(x)$ is linear. 
+    \begin{proof}
+        We need to show that $T(p + q) = T(p) + T(q)$ and $T(cp) = cT(p)$ for all $p, q \in P_2$ and $c \in \mathbb{R}$. \\
+        Let $p, q \in P_2$ and $c \in \mathbb{R}$. \\
+        \[
+            T(p + q) = x^2(p + q)(x) = x^2p(x) + x^2q(x) = T(p) + T(q)
+        \]
+        \[T(cp) = x^2(cp)(x) = cx^2p(x) = cT(p)\]
+        Thus, $T$ is linear.
+
+    \end{proof}
+
+}
+
+Here's a short-cut to test if a transformation is linear:
+
 \thmr{}{}{
     Let $V, W$ be vector spaces over field $F$. A mapping $T: V \to W$ is a linear transformation if and only if for all $\lambda_1, \lambda_2 \in F$ and all $\vec{v}_1, \vec{v}_2 \in V$:
     \[
@@ -30,13 +57,307 @@ the ones on the right of the equal signs are the ones defined in the codomain $W
     \]
 }
 
+
+
 \ex{
-    Show $T:P_2 \to P_4$ given by $T(p) = x^2 p(x)$ is linear. 
+    Which of the following are linear transformations?
+\begin{enumerate}
+    \item $T: P_2 \to P_1$ given by $T(p) = p'$
+    \item $T: \mathbb{R} \to \mathbb{R}^2$ given by $T(x) = (x, 2x)$
+    \item $T: \mathbb{R} \to \mathbb{R}^2$ given by $T(x) = (x, x^2)$
+\end{enumerate}
+\begin{proof} We can use the definition of linear transformations to check each case: 
+    \begin{enumerate}
+        \item $T(p) = p'$ is linear since $T(\lambda_1p_1 + \lambda_2p_2) = (\lambda_1p_1 + \lambda_2p_2)' = \lambda_1p_1' + \lambda_2p_2' = \lambda_1T(p_1) + \lambda_2T(p_2)$
+        \item $T(x) = (x, 2x)$ is linear since $T(\lambda_1x_1 + \lambda_2x_2) = (\lambda_1x_1 + \lambda_2x_2, 2(\lambda_1x_1 + \lambda_2x_2)) = \lambda_1(x_1, 2x_1) + \lambda_2(x_2, 2x_2) = \lambda_1T(x_1) + \lambda_2T(x_2)$
+        \item $T(x) = (x, x^2)$ is not linear since $T(\lambda_1x_1 + \lambda_2x_2) = (\lambda_1x_1 + \lambda_2x_2, (\lambda_1x_1 + \lambda_2x_2)^2) \neq \lambda_1(x_1, x_1^2) + \lambda_2(x_2, x_2^2) = \lambda_1T(x_1) + \lambda_2T(x_2)$
+    \end{enumerate}
+\end{proof}
 }
 
 
+\ex{
+    $T: \mathbb{R}^2 \to P_1(\mathbb{R})$ given by $T(a, b) = a + bx$ is linear.
+    \begin{proof}
+        We want to show: $T(\lambda_1(a_1, b_1) + \lambda_2(a_2, b_2)) = \lambda_1T(a_1, b_1) + \lambda_2T(a_2, b_2)$
+        \[
+            T(\lambda_1(a_1, b_1) + \lambda_2(a_2, b_2)) = T(\lambda_1a_1 + \lambda_2a_2, \lambda_1b_1 + \lambda_2b_2) = (\lambda_1a_1 + \lambda_2a_2) + (\lambda_1b_1 + \lambda_2b_2)x
+        \]
+        \[
+            \lambda_1T(a_1, b_1) + \lambda_2T(a_2, b_2) = \lambda_1(a_1 + b_1x) + \lambda_2(a_2 + b_2x) = (\lambda_1a_1 + \lambda_2a_2) + (\lambda_1b_1 + \lambda_2b_2)x
+        \] \\
+        Therefore, $T(\lambda_1(a_1, b_1) + \lambda_2(a_2, b_2)) = \lambda_1T(a_1, b_1) + \lambda_2T(a_2, b_2)$ \\
+        Thus, $T$ is linear.
+    
+    \end{proof}
+        
+}
+
+\subsubsection{Three very important examples of linear transformations}
+\ex{
+    \textbf{1:} A transformation given by a matrix: $T : \mathbb{R}^n \to \mathbb{R}^m$ given by $T(x) = Ax$ where $A$ is a fixed $m \times n$ matrix. \\
+    \rmkb{Note that the domain of $T$ is $\mathbb{R}^n$ and the codomain is $\mathbb{R}^m$ – we reverse the order in which the dimensions of $A$ are listed.} \\
+    Check that $T$ is linear:
+    \pf{
+        We want to show: $T(\lambda_1v_1 + \lambda_2v_2) = \lambda_1T(v_1) + \lambda_2T(v_2)$ \\
+        Let $v_1, v_2 \in \mathbb{R}^n$ and $\lambda_1, \lambda_2 \in \mathbb{R}$. \\
+        \[
+            T(\lambda_1v_1 + \lambda_2v_2) = A(\lambda_1v_1 + \lambda_2v_2) = \lambda_1Av_1 + \lambda_2Av_2 = \lambda_1T(v_1) + \lambda_2T(v_2)
+        \]
+        Therefore, $T$ is linear. 
+    } 
+}
+
+\ex{
+    \textbf{2:} Differentiation: $D : C^1(\mathbb{R}) \to C(\mathbb{R})$ given by $D(f) = f'$. \\
+    Check that $D$ is linear:
+    \pf{
+        We want to show: $D(\lambda_1f_1 + \lambda_2f_2) = \lambda_1D(f_1) + \lambda_2D(f_2)$ \\
+        Let $f_1, f_2 \in C^1(\mathbb{R})$ and $\lambda_1, \lambda_2 \in \mathbb{R}$. \\
+        \[
+            D(\lambda_1f_1 + \lambda_2f_2) = (\lambda_1f_1 + \lambda_2f_2)' = \lambda_1f_1' + \lambda_2f_2' = \lambda_1D(f_1) + \lambda_2D(f_2)
+        \]
+        Therefore, $D$ is linear. 
+    }
+} 
+
+\ex{
+    \textbf{3:} The Identity map: $I : V \to V$ is defined by $I(v) = v$. For example when $V = \mathbb{R}$ the identity map is $I(x) = x$. \\
+    Check that $I$ is linear:
+    \pf{
+        We want to show: $I(\lambda_1v_1 + \lambda_2v_2) = \lambda_1I(v_1) + \lambda_2I(v_2)$ \\
+        Let $v_1, v_2 \in V$ and $\lambda_1, \lambda_2 \in \mathbb{R}$. \\
+        \[
+            I(\lambda_1v_1 + \lambda_2v_2) = \lambda_1v_1 + \lambda_2v_2 = \lambda_1I(v_1) + \lambda_2I(v_2)
+        \]
+        Therefore, $I$ is linear. 
+    }
+}
+
+More example of proofing a transformation is linear:
+\ex{
+    Show $T: P_2 \to P_4 $ given by $T(p) = x^2p(x)$ is linear.
+    \begin{proof}
+        We want to show that $T(\lambda_1p_1 + \lambda_2p_2) = \lambda_1T(p_1) + \lambda_2T(p_2)$ \\
+        Let $p_1, p_2 \in P_2$ and $\lambda_1, \lambda_2 \in \mathbb{R}$. \\
+        \[
+            T(\lambda_1p_1 + \lambda_2p_2) = x^2(\lambda_1p_1 + \lambda_2p_2)(x) = \lambda_1x^2p_1(x) + \lambda_2x^2p_2(x) = \lambda_1T(p_1) + \lambda_2T(p_2)
+        \]
+
+        Therefore, $T$ is linear.
+    \end{proof} 
+}
+
+An example of a transformation that is not linear:
+
+\rmkb{
+    Notice that when disproving a transformation is linear, we only need to find one counterexample. (i.e. one pair of vectors and one scalar that does not satisfy the properties of linearity)
+}
+
+\ex{
+    Is $T: M_{2 \times 2} \to M_{2 \times 2}$ given by $T(M) = \det(M)$ linear?
+    \begin{proof}
+        We can choose either disproving using addition or multiplication: \\
+        \textbf{Addition:} \\
+        proof by contradiction:
+        let A = $\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}$ and B = $\begin{bmatrix} 2 & 3 \\ 4 & 5 \end{bmatrix}$ \\
+        $T(A + B) = \det(A + B) = \det(\begin{bmatrix} 3 & 5 \\ 7 & 9 \end{bmatrix}) = 3(9) - 5(7) = \boxed{-8}$ \\
+        $T(A) + T(B) = \det(A) + \det(B) = 4 - 6 + 10 - 12 = \boxed{-4}$ \\
+        \[\boxed{-8 \neq -4}\]
+        Since $T(A + B) \neq T(A) + T(B)$, $T$ is not linear. \\
+        \textbf{Multiplication:} \\
+        proof by contradiction:
+        Let A = $I_2 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}$, let $\lambda \in \mathbb{R}$ be 2. 
+        $T(\lambda A) = \det(\lambda A) = \det(\begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}) = 2(2) - 0(0) = \boxed{4}$ \\
+        $\lambda T(A) = \lambda \det(A) = 2(1) - 0(0) = \boxed{2}$ \\
+        \[\boxed{4 \neq 2}\]
+        Since $T(\lambda A) \neq \lambda T(A)$, $T$ is not linear.
 
 
+
+    \end{proof}
+}
+\\ \textbf{Strategies for proving a transformation is linear:} \\
+Guess whether it is linear or not linear, and use that as the hypothesis. If you are trying to find a counter-example and you can't find one, you may want to try proving it is linear. On the other hand, if you want to prove it is linear, you may find the counter-example while trying to prove it is linear.\\
+\\Example for the notation:
+\rmkb{
+    Notation: \\
+    $D$: Take the derivative. \\
+    $D^2$: Take the derivative twice. \\
+    $I$: The identity, meaning to return the input. \\
+}
+
+
+\ex{
+    Evaluate $(D^2 + D - 3I)(e^{rt})$\\
+    \begin{proof}
+        \[
+            (D^2 + D - 3I)(e^{rt}) = D^2(e^{rt}) + D(e^{rt}) - 3I(e^{rt}) 
+        \]
+        \[
+            = D(re^{rt}) + re^{rt} - 3e^{rt} = r^2e^{rt} + re^{rt} - 3e^{rt} = (r^2 + r - 3)e^{rt}
+        \]
+        \[
+            = (r^2 + r - 3)e^{rt}
+        \]
+
+    \end{proof}
+
+}
+
+\rmkb{
+    Here, $I$ is a transformation rule or instructions that returns the input. It is important because each term in the transformation has a rule to transform it like the $D^2$ and $D$ terms. Sometimes, the $I$ term is not written out, but it is always there. 
+}
+
+\subsection{Properties of Linear Transformations}
+
+\thmr{}{}{
+    For any linear map from any $V$ to any $W$, \\
+    $T(\vec{0_V}) = \vec{0_W}$ \\ 
+}
+\thmr{}{}{
+    For any linear map from any $V$ to any $W$, \\
+    $T(-\vec{v}) = -T(\vec{v})$ \\ 
+}
+\pf{
+    Let $T: V \to W$ be a linear transformation. \\
+    1. $T(\vec{0_V}) = T(0 \cdot \vec{v}) = 0 \cdot T(\vec{v}) = \vec{0_W}$ \\
+    2. $T(\vec{0_V}) = T(\vec{v} + (-\vec{v})) = T(\vec{v}) + T(-\vec{v}) = \vec{0_W}$ \\
+}
+
+\subsection{The Kernel and Range of a Linear Transformation}
+\defn{Kernel}{
+    Let $T: V \to W$ be a linear transformation. The \textbf{kernel} of $T$, denoted by $\ker(T)$, is the set of all vectors in $V$ that are mapped to $\vec{0_W}$ by $T$. 
+    \[
+        \ker(T) = \{\vec{v} \in V : T(\vec{v}) = \vec{0_W}\}
+    \]
+}
+Note: If $T(\vec{v}) = A\vec{v}$, then $\ker(T) = \text{null}(A)$  
+
+\begin{figure}
+    \center
+    \includegraphics[width=0.5\textwidth]{img/kernel.png}
+    \caption{Kernel Diagram}
+\end{figure}
+
+\defn{}{
+    Let $T: V \to W$ be a linear transformation. The \textbf{range} of $T$, denoted by $\text{range}(T)$, is the set of all vectors in $W$ that are mapped to by $T$. 
+    \[
+        \text{range}(T) = \{T(\vec{v}) \in W : \vec{v} \in V\}
+    \]
+}
+Note: If $T(\vec{v}) = A\vec{v}$, then $\text{range}(T) = \text{col}(A)$
+
+\rmkb{
+    Domain is the set of all possible inputs, codomain is the set of all possible outputs, and range is the set of all actual outputs.
+}
+
+\ex{
+    $D^2 + D = 3I : C^{\infty} (\mathbb{R}) \to C^{\infty} (\mathbb{R})$ \\
+    Find the kernel and range of $D^2 + D$.
+    \[
+        \ker(D^2 + D) = \{y \in C^{\infty} (\mathbb{R}) : (D^2 + D)(y) = 0\}
+    \]
+    \[
+        = \{y \in C^{\infty} (\mathbb{R}) : y'' + y' = 0\}
+    \]
+}
+Therefore, a homogenous linear differential equation is an example of a kernel.
+
+\ex{
+    Let $T:P_2 \to P_1$ be defined as follow:
+    \[
+        T(ax^2 + bx + c) = (a+b) + (b - c)x
+    \] 
+    Find the kernel and range of $T$. \\
+    \textbf{Kernel:  } \\
+    We want $(a+b) + (b - c)x = 0$ in $P_2$ \\
+    Which is $0 + 0x$ in $P_1$ \\
+    Therefore, $(a+b)$ and $(b-c)$ must be 0. \\
+    \[
+        \begin{bmatrix}
+            \begin{array}{ccc|c}
+                1 & 1 & 0 & 0 \\
+                0 & 1 & -1 & 0
+            \end{array}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \begin{array}{ccc|c}
+                1 & 0 & 1 & 0 \\
+                0 & 1 & -1 & 0
+            \end{array}
+        \end{bmatrix}
+    \]
+    \[
+        a = -c, b = c, c = c
+    \]
+    \[
+        \ker(T) = \{-cx^2 + cx + c | c \in \mathbb{R}\}
+    \]
+    Write it as a spanned set: 
+    \[
+        \ker(T) = \text{span}\{-x^2 + x + 1\}
+    \]
+    \textbf{Range:}\\
+    We want $(a+b) + (b - c)x$ in $P_1$ \\
+    Let $b + ex $ be a generic element in $P_1$ \\
+    Therefore, $d = a + b$ and $e = b - c$ \\
+    We want to solve for $a, b, c$ in terms of $d, e$ \\
+    \[
+        \begin{bmatrix}
+            \begin{array}{ccc|c}
+                1 & 1 & 0 & d \\
+                0 & 1 & -1 & e
+            \end{array}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \begin{array}{ccc|c}
+                1 & 0 & 1 & d - e\\
+                0 & 1 & -1 & e
+            \end{array}
+        \end{bmatrix}
+    \]\\
+    \[
+        a = d - e -c, b = e + c, c \text{ is free}
+    \]
+    \[
+        (a + b) + (b - c)x = (d - e + e + c) + (e + c - c)x = d + ex
+    \]
+    \[
+        \text{range}(T) = \{d + ex | d, e \in \mathbb{R}\}
+    \]
+    So the range is all of $P_1(\mathbb{R})$.
+}
+
+\thmr{}{}{
+    Let $T: V \to W$ be a linear transformation. Then:
+    \begin{enumerate}
+        \item $\ker(T)$ is a subspace of $V$
+        \item $\text{range}(T)$ is a subspace of $W$
+    \end{enumerate}
+}
+
+\pf{}
+
+\ex{}
+
+\thmr{Genearl Rank-Nullity Theorem}{Genearl Rank-Nullity Theorem}{
+    Let $T: V \to W$ be a linear transformation. Then:
+    \[
+        \dim(V) = \dim(\ker(T)) + \dim(\text{range}(T))
+    \]
+}
+
+\ex{}
+
+
+\ex{}
+
+
+
+\subsection{Linear transformation and basis}
 
 
 
