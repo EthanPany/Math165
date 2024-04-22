@@ -418,63 +418,84 @@ Therefore, a homogenous linear differential equation is an example of a kernel.
 
     % TODO: figure out how to prove this
 
-    % \begin{proof}
-    %     \textbf{Kernel:} \\
-    %     We want to find $A$ such that $AA^T = \vec{0}$. \\
-    %     \[
-    %         \begin{bmatrix}
-    %             a & b \\
-    %             c & d
-    %         \end{bmatrix}
-    %         \begin{bmatrix}
-    %             a & c \\
-    %             b & d
-    %         \end{bmatrix}
-    %         =
-    %         \begin{bmatrix}
-    %             a^2 + b^2 & ac + bd \\
-    %             ac + bd & c^2 + d^2
-    %         \end{bmatrix}
-    %         =
-    %         \begin{bmatrix}
-    %             0 & 0 \\
-    %             0 & 0
-    %         \end{bmatrix}
-    %     \]
-    %     \[
-    %         a^2 + b^2 = 0, ac + bd = 0, c^2 + d^2 = 0
-    %     \]
-    %     \[
-    %         a = b = c = d = 0
-    %     \]
-    %     Therefore, the kernel is $\{0\}$ and the dimension is 0. \\
-    %     \textbf{Range:} \\
-    %     We want to find $A$ such that $AA^T = B$ for some $B \in M_2(\mathbb{R})$. \\
-    %     \[
-    %         \begin{bmatrix}
-    %             a & b \\
-    %             c & d
-    %         \end{bmatrix}
-    %         \begin{bmatrix}
-    %             a & c \\
-    %             b & d
-    %         \end{bmatrix}
-    %         =
-    %         \begin{bmatrix}
-    %             a^2 + b^2 & ac + bd \\
-    %             ac + bd & c^2 + d^2
-    %         \end{bmatrix}
-    %     \]
-    %     Therefore, the range is all of $M_2(\mathbb{R})$ and the dimension is 4. \\
-    %     \textbf{Rank-Nullity Theorem:} \\
-    %     \[
-    %         \dim(M_2(\mathbb{R})) = \dim(\ker(S)) + \dim(\text{range}(S))
-    %     \]
-    %     \[
-    %         4 = 0 + 4
-    %     \]
-    %     Therefore, the rank-nullity theorem holds.
-    % \end{proof}
+    \begin{proof}
+        \textbf{Kernel:} \\
+        We want to find $A$ such that $AA^T = \vec{0}$. \\
+        \[
+            \begin{bmatrix}
+                a & b \\
+                c & d
+            \end{bmatrix}
+            \begin{bmatrix}
+                a & c \\
+                b & d
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                a^2 + b^2 & ac + bd \\
+                ac + bd & c^2 + d^2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0 & 0 \\
+                0 & 0
+            \end{bmatrix}
+        \]
+        \[
+            a^2 + b^2 = 0, ac + bd = 0, c^2 + d^2 = 0
+        \]
+        \[
+            a = b = c = d = 0
+        \]
+        Therefore, the kernel is $\{0\}$ and the dimension is 0. \\
+        \textbf{Range:} \\
+        We want to find $A$ such that $AA^T = B$ for some $B \in M_2(\mathbb{R})$. \\
+        \[
+            \begin{bmatrix}
+                a & b \\
+                c & d
+            \end{bmatrix}
+            \begin{bmatrix}
+                a & c \\
+                b & d
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                a^2 + b^2 & ac + bd \\
+                ac + bd & c^2 + d^2
+            \end{bmatrix}
+        \]
+        The basis for it will be: \\
+        \[
+            \begin{Bmatrix}
+                \begin{bmatrix}
+                    1 & 0 \\
+                    0 & 0
+                \end{bmatrix}
+                \begin{bmatrix}
+                    0 & 1 \\
+                    1 & 0
+                \end{bmatrix}
+                \begin{bmatrix}
+                    0 & 0 \\
+                    0 & 1
+                \end{bmatrix}
+            \end{Bmatrix}
+        \]
+        Therefore, the range is all of $M_2(\mathbb{R})$ and the dimension is 4. \\
+        \textbf{Rank-Nullity Theorem:} \\
+        \[
+            \dim(M_2(\mathbb{R})) = \dim(\ker(S)) + \dim(\text{range}(S))
+        \]
+        \[
+            \boxed{4 \neq 0 + 3}
+        \]
+        
+    \end{proof}
+
+    This is not a linear transformation because it does not satisfy the properties of linearity. Therefore, the rank-nullity theorem does not hold.
+
+
 }
 
 
@@ -512,7 +533,31 @@ Therefore, a homogenous linear differential equation is an example of a kernel.
     %         \dim(M_2(\mathbb{R})) = \dim(\ker(T)) + \dim(\text{range}(T))
     %     \]
     % \end{proof}
-    
+
+    Step 1: Verify it is linear: \\
+    Let $A = \begin{bmatrix} a_1 & b_1 \\ c_1 & d_1 \end{bmatrix}$ and $B = \begin{bmatrix} a_2 & b_2 \\ c_2 & d_2 \end{bmatrix}$ \\
+    \[
+        T(A + B) = T\begin{pmatrix}
+            \begin{bmatrix} a_1 + a_2 & b_1 + b_2 \\ c_1 + c_2 & d_1 + d_2 \end{bmatrix}
+        \end{pmatrix}
+        = (a_1 + a_2 - b_1 - b_2 + d_1 + d_2) + (-a_1 - a_2 + b_1 + b_2 - d_1 - d_2)x^2
+    \]
+    \[
+        T(A) + T(B) = T\begin{pmatrix}
+            \begin{bmatrix} a_1 & b_1 \\ c_1 & d_1 \end{bmatrix}
+        \end{pmatrix} + T\begin{pmatrix}
+            \begin{bmatrix} a_2 & b_2 \\ c_2 & d_2 \end{bmatrix}
+        \end{pmatrix}
+        = (a_1 - b_1 + d_1) + (-a_1 + b_1 - d_1)x^2 + (a_2 - b_2 + d_2) + (-a_2 + b_2 - d_2)x^2
+    \]
+    \[
+        (a_1 + a_2 - b_1 - b_2 + d_1 + d_2) + (-a_1 - a_2 + b_1 + b_2 - d_1 - d_2)x^2
+    \]
+    \[
+        T(A + B) = T(A) + T(B)
+    \]
+    Therefore, $T$ is linear. \\
+
 }
 
 

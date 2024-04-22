@@ -3,14 +3,513 @@
     This lecture covers: 
     \begin{itemize}
         \item 9.1 First Order Linear Systems
+        \item 9.2 Vector Formulation
+        \item 9.3 General Results for First Order Linear Systems
     \end{itemize}
+}
+
+\rmkb{
+    Today we are going to cover 9.1 to 9.3. We are going to skip many theorems. \\
+    Next week we are going to do some examples for chapter 8. 
+}
+
+\subsection{Chapter 9.1: First Order Linear Systems}
+
+An example of the first-order linear system is:
+
+\ex{
+    \[
+        x_1 ' = x_1 + 2x_2
+    \]
+    \[
+        x_2 ' = 2x_1 + 2x_2
+    \]
+    \[
+        x_1(0) = 1, x_2(0) = 0
+    \]
+}
+
+If $b_i (t) = 0$, the system is homogenous. 
+
+A \textbf{solution} is an ordered n-tuple of functions $x_1(t), x_2(t), \dots, x_n(t)$ that satisfies the system of equations.
+
+\ex{
+    \[
+        x_1 ' = x_1 + 2x_2
+    \]
+    \[
+        x_2 ' = 2x_1 + 2x_2
+    \]
+    \[
+        x_1(0) = 1, x_2(0) = 0
+    \]
+    \[
+        x_1(t) = e^t, x_2(t) = e^t
+    \]
+    is a solution. 
+}
+
+There's a trick to solving the 2 by 2 system, however, we are going to skip it. 
+
+
+\rmkb{
+    The first-order linear system is restrictive. However, we can transform a higher-order system by renaming functions.
+}
+
+\ex{
+    \[
+        \frac{d^2x}{dt^2} + 4e^t \frac{dx}{dt} - 9t^2x = 7t^2
+    \]
+    Strataegy: Let $x_1 = x$, $x_1' = x_2$
+    \[
+        x_1' = x_2
+    \]
+    \[
+        x_2' = 9t^2x + 4e^t x_2 - 7t^2
+    \]
+    (Chapter 9.1)
+}
+
+
+\subsection{Chapter 9.2: Vector Formulation}
+\rmkb{Chapter 9.2: How to transform the system into a matrix form.
+}
+
+\ex{
+    Formulate with vectors. \\
+    \[
+        \vec{x}(t) = \begin{bmatrix}
+            x_1(t) \\
+            x_2(t) \\
+            \cdots \\
+            x_n(t)
+        \end{bmatrix}
+    \]
+    \[
+        \vec{x}'(t) = \begin{bmatrix}
+            x_1'(t) \\
+            x_2'(t) \\
+            \cdots \\
+            x_n'(t)
+        \end{bmatrix}
+    \]
+    % \[
+    %     A(t) = \begin{bmatrix}
+    %         a_{11}(t) & a_{12}(t) & \cdots & a_{1n}(t) \\
+    %         a_{21}(t) & a_{22}(t) & \cdots & a_{2n}(t) \\
+    %         \cdots & \cdots & \cdots & \cdots \\
+    %         a_{n1}(t) & a_{n2}(t) & \cdots & a_{nn}(t) 
+    %     \end{bmatrix}
+
+    % \]
+    Coefficient matrix: \\
+    \[
+        \vec{b}(t) = \begin{bmatrix}
+            b_1(t) \\
+            b_2(t) \\
+            \cdots \\
+            b_n(t)
+        \end{bmatrix}
+    \]
+
+}   
+
+\thmr{}{}{
+    $V_n(I)$ is a column vector of $n$ functions defined on an interval $I$.
+}
+\ex{
+    \[
+        \begin{bmatrix}
+            e^{3t} \\
+            2\\
+            e^{7t}
+        \end{bmatrix}
+        \in V_3(\mathbb{R})
+    \]
+    for any fixed $n$, $I$, $V_n(I)$ is a vector space.
 }
 
 
 
 
+\subsubsection{Wronskian}
+\rmkb{
+    We do not test this
+}
+Wronskan of a set of $n$ column vectors in $V_n(I)$ 
+
+Wronskien of $\{\vec{x}_1, \vec{x}_2, \cdots, \vec{x}_n \}$
+
+$W(t) = \text{Wronskian} = \begin{bmatrix}
+    \vec{x}_1 & \vec{x}_2 & \cdots & \vec{x}_n
+\end{bmatrix}  $
+
+\thmr{}{}{
+    If $W(t) \neq 0$ for all $t \in I$, then $\{\vec{x}_1, \vec{x}_2, \cdots, \vec{x}_n \}$ is linearly independent. 
+}
+
+\thmr{}{}{
+    If $\{\vec{x}_1, \vec{x}_2, \cdots, \vec{x}_n \}$ is linearly independent, then $W(t) \neq 0$ for all $t \in I$. 
+}
 
 
+\subsection{Chapter 9.3: Genearl results for first-order linear systems}
+\thmr{Initial value problem}{}{
+    $\vec{x}'(t) = A(t) \vec{x}(t) + \vec{b}(t)   $ and $\vec{x}(t_0) = \vec{x}_0$ has a unique solution on an interval $I$ containing $t_0$ if $A(t)$ and $\vec{b}(t)$ are continuous on $I$.
+}   
+
+
+
+\thmr{9.3.2}{}{
+    The set of solutions to the homogenous system $\vec{x}'(t) = A(t) \vec{x}(t)$ is a vector space of dimension $n$.
+}
+
+\subsubsection{Fundamental solution set}
+The fundamental solution set is basically a basis for the solution space.
+
+\thmr{The fundamental solution set}{}{
+    \[
+        S = \{
+            x_1, x_2, \cdots, x_n
+        \}
+    \]
+    S is a set of solutions to the homogenous system $\vec{x}'(t) = A(t) \vec{x}(t)$ that are linearly independent.
+}
+
+The non-homogenous case:
+\[
+    \vec{x} = c_1 \vec{x}_1 + c_2 \vec{x}_2 + \cdots + c_n \vec{x}_n + \boxed{\vec{x}_p}
+\]
+
+We add a single solution to the homogenous system to the solution of the non-homogenous system.
+
+
+Simplifying assumptions:
+\[
+    \vec{x}'(t) = A\vec{x}(t)
+\]
+is homogenous and $A$ is a matrix of constants and $A$ is non-defective.
+
+\rmkb{
+    Recall: Non-defective means that the matrix has $n$ linearly independent eigenvectors.
+}
+
+\thmr{}{}{
+    Let $A$ be a $n \times n$ matrix of real constants, and let $\lambda$ be a real eigenvalue of corresponding to the eigenvector $\vec{v}$. \\
+    
+    Then 
+    \[
+        \vec{x}(t) = e^{\lambda t} \vec{v}
+    \]
+    is a solution to the homogenous system $\vec{x}'(t) = A\vec{x}(t)$.
+}
+\rmkb{
+    Recall: Means that $A\vec{v} = \lambda \vec{v}$
+}
+
+\pf{
+    If $\vec{x}(t) = e^{\lambda t} \vec{v}$, then
+    \[
+        A(e^{\lambda t} \vec{v}) = e^{\lambda t} A\vec{v} = e^{\lambda t} \lambda \vec{v} = \lambda e^{\lambda t} \vec{v}
+    \]
+    On the other side, if I take the derivative of $\vec{x}(t)$, I get
+    \[
+        \vec{x}'(t) = \lambda e^{\lambda t} \vec{v}
+    \]
+    We notice that the two sides are equal.
+}
+
+And we are going to have enough solutions to form a basis for the solution space.
+
+
+\thmr{}{}{
+    If $A$ has $n$ real eigenvectors $\vec{v}_1, \vec{v}_2, \cdots, \vec{v}_n$ with corresponding real eigenvalues $\lambda_1, \lambda_2, \cdots, \lambda_n$, then 
+    \[
+        \vec{x}_k = e^{\lambda_k t} \vec{v}_k
+    \]
+    is a solution to the homogenous system $\vec{x}'(t) = A\vec{x}(t)$.
+
+}
+
+
+\ex{
+    \[
+        A = \begin{bmatrix}
+            1 & 2 \\
+            2 & -2
+        \end{bmatrix}
+    \]
+    The eigenvalue is: \\
+    \[
+        | A - \lambda I | = (1 - \lambda) \cdot (-2 - \lambda) - 4 = 0
+    \]
+    \[
+        \lambda = 2, -3
+    \]
+    nullspace of $A - 2I$ is $\begin{bmatrix}
+        -1 & 2 \\
+        2 & -4
+    \end{bmatrix} \to \begin{bmatrix}
+        1 & -2 \\
+        0 & 0
+    \end{bmatrix} 
+    $ \[
+        \vec{v}_1 = \begin{bmatrix}
+            2 \\
+            1
+        \end{bmatrix}
+    \]
+    nullspace of $A + 3I$ is $\begin{bmatrix}
+        4 & 2 \\
+        2 & 1
+    \end{bmatrix} \to \begin{bmatrix}
+        2 & 1 \\
+        0 & 0
+    \end{bmatrix}
+    $ \[
+        \vec{v}_2 = \begin{bmatrix}
+            -1 \\
+            2
+        \end{bmatrix}
+    \]
+    \textbf{What's new today:} \\
+    Solution = \\
+    \[
+        \begin{bmatrix}
+            x_1 \\ x_2
+        \end{bmatrix}
+        =
+        c_1 e^{2t} \begin{bmatrix}
+            2 \\ 1
+        \end{bmatrix}
+        +
+        c_2 e^{-3t} \begin{bmatrix}
+            -1 \\ 2
+        \end{bmatrix}
+    \]
+    \[
+        x_1 = 2 c_1 e^{2t} - c_2 e^{-3t}
+    \]
+    \[
+        x_2 = c_1 e^{2t} + 2c_2 e^{-3t}
+    \]
+
+    Initial values: \\
+    \[
+        x_1(0) = 2c_1 - c_2 = 1
+    \]
+    \[
+        x_2(0) = c_1 + 2c_2 = 0
+    \]
+    \[
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                2 & -1 & 1 \\
+                1 & 2 & 0
+            \end{array}
+        \end{bmatrix}
+        \to
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                1 & 2 & 0 \\
+                2 & -1 & 1
+            \end{array}
+        \end{bmatrix}
+        \to
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                1 & 2 & 0 \\
+                0 & -5 & 1
+            \end{array}
+        \end{bmatrix}
+        \to
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                1 & 0 & 2/5 \\
+                0 & 1 & -1/5
+            \end{array}
+        \end{bmatrix}
+    \]
+
+}
+
+\ex{
+    \[
+        \vec{x' = A\vec{x}}
+    \]
+    \[
+        A = \begin{bmatrix}
+            0 & 4 \\
+            1 & 0
+        \end{bmatrix}
+    \]
+    \[
+        x_1' = 4x_2
+    \]
+    \[
+        x_2' = x_1
+    \]
+    \textbf{Step 1: Find the eigenvalues and eigenvectors} \\
+    \[
+        |A - \lambda I| = \begin{bmatrix}
+            -\lambda & 4 \\
+            1 & -\lambda
+        \end{bmatrix} = \lambda^2 - 4 = 0
+    \]
+    \[
+        \lambda _1 = 2, \lambda_2 = -2
+    \]
+    \textbf{For $\lambda_1 = 2$} \\
+    \[
+        \begin{bmatrix}
+            -2 & 4 \\
+            1 & -2
+        \end{bmatrix} \to \begin{bmatrix}
+            1 & -2 \\
+            0 & 0
+        \end{bmatrix}
+    \]
+    \[
+        \boxed{\vec{v}_1 = \begin{bmatrix}
+            2 \\
+            1
+        \end{bmatrix}}
+    \]
+    \textbf{For $\lambda_2 = -2$} \\
+    \[
+        \begin{bmatrix}
+            2 & 4 \\
+            1 & 2
+        \end{bmatrix} \to \begin{bmatrix}
+            1 & 2 \\
+            0 & 0
+        \end{bmatrix}
+    \]
+    \[
+        \boxed{\vec{v}_2 = \begin{bmatrix}
+            -2 \\
+            1
+        \end{bmatrix}}
+    \]
+    \textbf{Step 2: Write the general solution} \\
+    \[
+        \begin{bmatrix}
+            x_1 \\ x_2
+        \end{bmatrix}
+        =
+        c_1 e^{2t} \begin{bmatrix}
+            2 \\ 1
+        \end{bmatrix}
+        +
+        c_2 e^{-2t} \begin{bmatrix}
+            -2 \\ 1
+        \end{bmatrix}
+    \]
+}
+
+\rmkb{
+    If you can not zero out the second role, it means that you are wrong. 
+}
+
+
+Let's do a 3 by 3 example.
+We will leave the complex case for the next lecture.s
+
+\ex{
+    \[
+        A = \begin{bmatrix}
+            0 & -3 & 1 \\
+            -2 & -1 & 1 \\
+            0 & 0& 2
+        \end{bmatrix}
+    \]
+    \textbf{Step 1: Find the eigenvalues and eigenvectors} \\
+    \[
+        |A - \lambda I| = 
+        \begin{bmatrix}
+            0 - \lambda & -3 & 1 \\
+            -2 & -1 - \lambda & 1 \\
+            0 & 0 & 2 - \lambda
+        \end{bmatrix}
+        = 0
+    \]
+    Characteristic polynomial: \\
+    \[
+        (2 - \lambda)(\lambda -3) (\lambda - 2) = 0
+    \]
+    \[
+        \lambda_1 = 2, \lambda_2 = -3, \lambda_3 = 2
+    \]
+    \textbf{For $\lambda_1 = 2$} \\
+    \[
+        \begin{bmatrix}
+            -2 & -3 & 1 \\
+            -2 & -3 & 1 \\
+            0 & 0 & 0
+        \end{bmatrix} \to \begin{bmatrix}
+            -2 & -3 & 1 \\
+            0 & 0 & 0 \\
+            0 & 0 & 0
+        \end{bmatrix}
+    \]
+        $x_2, x_3 $ are free
+    \[
+        -2x_1 = 3x_2 - x_3
+    \]
+    \[
+        x_1 = -\frac{3}{2} x_2 + \frac{1}{2} x_3
+    \]
+
+    \[
+        \vec{v}_1 = (3, -2, 0)
+    \]
+    \[
+        \vec{v}_2 = (1, 0, 2)
+    \]
+
+    \textbf{For $\lambda_2 = -3$} \\
+    \[
+        \begin{bmatrix}
+            3 & -3 & 1 \\
+            -2 & 2 & 1 \\
+            0 & 0 & 5
+        \end{bmatrix} \to \begin{bmatrix}
+            1 & -1 & 0 \\
+            0 & 0 & 1\\
+            0 & 0 & 0
+        \end{bmatrix}
+    \]
+    $x_2$ is free
+    \[
+        x_1 = x_2
+    \]
+    \[
+        x_3 = 0
+    \]
+    \[
+        \vec{v}_3 = (1, 1, 0)
+    \]
+
+    \textbf{Step 2: Write the general solution} \\
+    \[
+        \begin{bmatrix}
+            x_1 \\ x_2 \\ x_3
+        \end{bmatrix}
+        =
+        c_1 e^{2t} \begin{bmatrix}
+            3 \\ -2 \\ 0
+        \end{bmatrix}
+        +
+        c_2 e^{-3t} \begin{bmatrix}
+            1 \\ 0 \\ 2
+        \end{bmatrix}
+        +
+        c_3 e^{2t} \begin{bmatrix}
+            1 \\ 1 \\ 0
+        \end{bmatrix}
+    \]
+
+}
 
 
 
