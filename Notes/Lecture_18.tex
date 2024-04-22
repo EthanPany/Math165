@@ -339,9 +339,72 @@ Therefore, a homogenous linear differential equation is an example of a kernel.
     \end{enumerate}
 }
 
-\pf{}
+\pf{
+    Let $T: V \to W$ be a linear transformation. \\
+    1. $\ker(T)$ is a subspace of $V$ \\
+    \begin{enumerate}
+        \item $\vec{0_V} \in \ker(T)$ since $T(\vec{0_V}) = \vec{0_W}$
+        \item Let $\vec{v}_1, \vec{v}_2 \in \ker(T)$ and $\lambda \in \mathbb{R}$. \\
+        Then $T(\vec{v}_1 + \vec{v}_2) = T(\vec{v}_1) + T(\vec{v}_2) = \vec{0_W} + \vec{0_W} = \vec{0_W}$ \\
+        Therefore, $\vec{v}_1 + \vec{v}_2 \in \ker(T)$ 
+        \item Also, $T(\lambda\vec{v}_1) = \lambda T(\vec{v}_1) = \lambda \vec{0_W} = \vec{0_W}$ \\
+        Therefore, $\lambda\vec{v}_1 \in \ker(T)$ \\
+        Thus, $\ker(T)$ is a subspace of $V$.
+    \end{enumerate}
+    2. $\text{range}(T)$ is a subspace of $W$ 
+    \begin{enumerate}
+        \item $\vec{0_W} \in \text{range}(T)$ since $T(\vec{0_V}) = \vec{0_W}$
+        \item Let $\vec{w}_1, \vec{w}_2 \in \text{range}(T)$ and $\lambda \in \mathbb{R}$. \\
+        Then there exists $\vec{v}_1, \vec{v}_2 \in V$ such that $T(\vec{v}_1) = \vec{w}_1$ and $T(\vec{v}_2) = \vec{w}_2$. \\
+        Then $T(\vec{v}_1 + \vec{v}_2) = T(\vec{v}_1) + T(\vec{v}_2) = \vec{w}_1 + \vec{w}_2$ \\
+        Therefore, $\vec{w}_1 + \vec{w}_2 \in \text{range}(T)$ 
+        \item Also, $T(\lambda\vec{v}_1) = \lambda T(\vec{v}_1) = \lambda \vec{w}_1$ \\
+        Therefore, $\lambda\vec{w}_1 \in \text{range}(T)$ \\
+        Thus, $\text{range}(T)$ is a subspace of $W$.
+    \end{enumerate}
 
-\ex{}
+}
+
+\ex{
+    Find the basis for the range and kernel of: $D^2: P_3 \to P_3 $ given by  $D^2(p) = p''$ \\
+}
+\pf{
+    \[
+        p(x) = ax^3 + bx^2 + cx + d.
+    \]
+    \textbf{Basis for the Kernel:} \\
+    The kernel of a linear transformation consists of all elements that map to the zero element of the codomain. For the transformation \(D^2\), we need to find all \(p \in P_3\) such that \(D^2(p) = 0\). 
+    Applying \(D^2\) to the general polynomial:
+    \[
+    p''(x) = (ax^3 + bx^2 + cx + d)'' = (3ax^2 + 2bx + c)'' = 6ax + 2b.
+    \]
+    Setting \(p''(x) = 0\) yields:
+    \[
+    6ax + 2b = 0.
+    \]
+    For this to be true for all \(x\), we must have \(a = 0\) and \(b = 0\). Therefore, \(p(x)\) reduces to:
+    \[
+    p(x) = cx + d.
+    \]
+
+    Polynomials of the form \(cx + d\) clearly form the kernel of \(D^2\), and are elements of \(P_1\) (the space of all polynomials of degree at most 1). Hence, a basis for the kernel of \(D^2\) consists of the polynomials:
+    \[
+    \boxed{\{1, x\}}
+    \] 
+}
+
+\pf{
+    \textbf{Basis for the Range:} \\
+    The range of \(D^2\) consists of all possible outputs \(D^2(p)\) for \(p \in P_3\). From the calculation above, we found:
+    \[
+    D^2(p) = 6ax + 2b.
+    \]
+
+    This expression tells us that the output of \(D^2\) can be any polynomial of the form \(6ax + 2b\), which can be rewritten as a linear combination of the basis \(\{x, 1\}\) (or equivalently, \(\{6x, 2\}\)).
+    \[
+    \boxed{\{6x, 2\}}
+    \]
+}
 
 \thmr{Genearl Rank-Nullity Theorem}{Genearl Rank-Nullity Theorem}{
     Let $T: V \to W$ be a linear transformation. Then:
@@ -350,15 +413,275 @@ Therefore, a homogenous linear differential equation is an example of a kernel.
     \]
 }
 
-\ex{}
+\ex{
+    Let $S : M_2(\mathbb{R}) \to M_2(\mathbb{R})$ be the transformation with the rule $S(A) = A A^T$. Find a basis for its kernel and the dimension of its range. Confirm the general rank/nullity theorem based on what we found about its kernel and range previously.
+
+    % TODO: figure out how to prove this
+
+    % \begin{proof}
+    %     \textbf{Kernel:} \\
+    %     We want to find $A$ such that $AA^T = \vec{0}$. \\
+    %     \[
+    %         \begin{bmatrix}
+    %             a & b \\
+    %             c & d
+    %         \end{bmatrix}
+    %         \begin{bmatrix}
+    %             a & c \\
+    %             b & d
+    %         \end{bmatrix}
+    %         =
+    %         \begin{bmatrix}
+    %             a^2 + b^2 & ac + bd \\
+    %             ac + bd & c^2 + d^2
+    %         \end{bmatrix}
+    %         =
+    %         \begin{bmatrix}
+    %             0 & 0 \\
+    %             0 & 0
+    %         \end{bmatrix}
+    %     \]
+    %     \[
+    %         a^2 + b^2 = 0, ac + bd = 0, c^2 + d^2 = 0
+    %     \]
+    %     \[
+    %         a = b = c = d = 0
+    %     \]
+    %     Therefore, the kernel is $\{0\}$ and the dimension is 0. \\
+    %     \textbf{Range:} \\
+    %     We want to find $A$ such that $AA^T = B$ for some $B \in M_2(\mathbb{R})$. \\
+    %     \[
+    %         \begin{bmatrix}
+    %             a & b \\
+    %             c & d
+    %         \end{bmatrix}
+    %         \begin{bmatrix}
+    %             a & c \\
+    %             b & d
+    %         \end{bmatrix}
+    %         =
+    %         \begin{bmatrix}
+    %             a^2 + b^2 & ac + bd \\
+    %             ac + bd & c^2 + d^2
+    %         \end{bmatrix}
+    %     \]
+    %     Therefore, the range is all of $M_2(\mathbb{R})$ and the dimension is 4. \\
+    %     \textbf{Rank-Nullity Theorem:} \\
+    %     \[
+    %         \dim(M_2(\mathbb{R})) = \dim(\ker(S)) + \dim(\text{range}(S))
+    %     \]
+    %     \[
+    %         4 = 0 + 4
+    %     \]
+    %     Therefore, the rank-nullity theorem holds.
+    % \end{proof}
+}
 
 
-\ex{}
+\ex{
+    Consider the linear transformation $T : M_2(\mathbb{R}) \to P_2(\mathbb{R})$ given by \\ 
+    \[
+        T\begin{pmatrix}
+            \begin{bmatrix} a & b \\ c & d \end{bmatrix}
+        \end{pmatrix} = (a - b + d) + ( - a + b - d)x^2
+    \]
+    Determine $\text{range}(T)$. What is the dimension of $\ker(T)$? Determine a basis for $\ker(T)$.
+
+    % \begin{proof}
+    %     \textbf{Kernel:} \\
+    %     We want to find $A$ such that $T(A) = 0$. \\
+    %     \[
+    %         (a - b + d) + ( - a + b - d)x^2 = 0
+    %     \]
+    %     \[
+    %         a - b + d = 0, -a + b - d = 0
+    %     \]
+    %     \[
+    %         a = b = d = 0
+    %     \]
+    %     Therefore, the kernel is $\begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix}$ and the dimension is 1. \\
+    %     \textbf{Range:} \\
+    %     We want to find $A$ such that $T(A) = p(x)$. \\
+    %     \[
+    %         (a - b + d) + ( - a + b - d)x^2 = p(x)
+    %     \]
+    %     Let $y = a - b + d$ and $z = -a + b - d$. \\
+    %     Therefore, the range is all of $P_2(\mathbb{R})$ and the dimension is 2. \\
+    %     \textbf{Rank-Nullity Theorem:} \\
+    %     \[
+    %         \dim(M_2(\mathbb{R})) = \dim(\ker(T)) + \dim(\text{range}(T))
+    %     \]
+    % \end{proof}
+    
+}
 
 
 
 \subsection{Linear transformation and basis}
 
+If we have a matrix $A$ that's $m$ by $n$, we get a free transformation. 
+$T: f_n \to f_m$ given by $T(x) = Ax$ if $V$ and $W$ are finite-dimensional, then $T: V \to W$ can be accomplished by a matrix multiplication. That is there exist a matrix $A$ such that $T(\vec{v}) = A\vec{v}$ for all $\vec{v} \in V$.
+
+% We have seen that, given an m × n matrix A, we can define a linear transformation T : Rn → Rm by T (v) = Av. (Remember that an m × n matrix maps R n
+% to R
+% m
+% .)
+% Now, given a linear transformation T : Rn → Rm, we identify an m × n matrix A such that T (v) = Av.
+% This is possible, because if we know how T acts on a basis {b1, . . . , bn} of V , then we know how T acts on the whole of V , since if v = c1b1 + . . . ckbk, then
+% T (v) = T (c1b1 + . . . ckbk) = c1T (b1) + . . . ckT (bk).
+% In particular, if T : Rn → Rm and if v = (c1, c2, . . . , cn) = c1e1 + c2e2 + · · · + cnen, then
+% T (v) = T (c1e1 + c2e2 + · · · + cnen) = c1T (e1) + c2T (e2) + · · · + cnT (en) .
+% By the definition of matrix multiplication, the boxed expression is equal to
+%   c1   [T (e1)|T (e2)| · · · |T (en)]
+%  c2   .   . .
+% .
+% 
+% cn
+% Then T (v) = Av where A = [T (e1)|T (e2)| · · · |T (en)]. 
+
+\thmr{}{}{
+    Let $T : \mathbb{R}^n \to \mathbb{R}^m$ be a linear transformation. Then there exists an $m \times n$ matrix $A$ such that $T(v) = Av$ for all $v \in \mathbb{R}^n$.
+}
 
 
+We have seen that, given an $m \times n$ matrix A, we can define a linear transformation $T : \mathbb{R}^n \to \mathbb{R}^m$ by $T(v) = Av$. (Remember that an $m \times n$ matrix maps $\mathbb{R}^n$ to $\mathbb{R}^m$.) 
+
+Now, given a linear transformation $T : \mathbb{R}^n \to \mathbb{R}^m$, we identify an $m \times n$ matrix A such that $T(v) = Av$. 
+
+This is possible, because if we know how T acts on a basis $\{b_1, \cdots, b_n\}$ of $V$, then we know how T acts on the whole of $V$, since if $v = c_1b_1 + \cdots + c_kb_k$, then 
+
+\[
+    T(v) = T(c_1b_1 + \cdots + c_kb_k) = c_1T(b_1) + \cdots + c_kT(b_k)
+\]
+
+In particular, if $T : \mathbb{R}^n \to \mathbb{R}^m$ and if $v = (c_1, c_2, \cdots, c_n) = c_1e_1 + c_2e_2 + \cdots + c_ne_n$, then
+
+\[T(v) = T(c_1e_1 + c_2e_2 + \cdots + c_ne_n) = \boxed{c_1T(e_1) + c_2T(e_2) + \cdots + c_nT(e_n)}\]
+
+By the definition of matrix multiplication, the boxed expression is equal to
+
+\[
+    \begin{bmatrix}
+        T(e_1) & T(e_2) & \cdots & T(e_n)
+    \end{bmatrix}
+    \begin{bmatrix}
+        c_1\\
+        c_2\\
+        \vdots\\
+        c_n
+    \end{bmatrix}
+\]
+
+Then $T(v) = Av$ where $A = \begin{bmatrix} T(e_1) & T(e_2) & \cdots & T(e_n) \end{bmatrix}$.
+
+
+
+
+
+
+
+
+\ex{
+    Find $A$. $T_1 \mathbb{R}^2 \to \mathbb{R}^2$ \\
+    \[
+        T(x) = \beta 
+    \]
+    \[
+        \beta = \{\vec{e_1}, \vec{e_2}, \cdots , \vec{e_n}\}
+    \]
+    \[
+        T(x) = (a_1 \cdot e_1 + a_2 \cdot e_2 + \cdots + a_n \cdot e_n)
+    \]
+    \[
+        = a_1 T(\vec{e_1}) + a_2 T(\vec{e_2}) + \cdots + a_n T(\vec{e_n})
+    \]
+    \[
+        A = \begin{bmatrix}
+            T(\vec{e_1}) & T(\vec{e_2}) & \cdots & T(\vec{e_n})
+        \end{bmatrix}
+    \]
+    If I take the matrix A and apply it to the coefficient vector, I get the transformation.
+    \[
+        A \cdot
+        \begin{bmatrix}
+            a_1\\
+            a_2\\
+            \vdots\\
+            a_n
+        \end{bmatrix}
+        = 
+        \begin{bmatrix}
+            T(\vec{e_1}) & T(\vec{e_2}) & \cdots & T(\vec{e_n})
+        \end{bmatrix}
+        \begin{bmatrix}
+            a_1\\
+            a_2\\
+            \vdots\\
+            a_n
+        \end{bmatrix}
+    \]
+    \[
+        = a_1 T(\vec{e_1}) + a_2 T(\vec{e_2}) + \cdots + a_n T(\vec{e_n})
+    \]
+    \[
+        = T(a_1 \vec{e_1} + a_2 \vec{e_2} + \cdots + a_n \vec{e_n})
+    \]
+
+}
+
+
+% Find a matrix A such that T (x) = A(x) where T : R3 → R2, is given by T (a, b, c) = (c, a + b).
+
+\ex{
+    Find a matrix $A$ such that $T(x) = A(x)$ where $T : \mathbb{R}^3 \to \mathbb{R}^2$ is given by $T(a, b, c) = (c, a + b)$.\\
+
+    Since this is from $\mathbb{R}^3$ to $\mathbb{R}^2$, the matrix $A$ will be $2 \times 3$. \\
+    \[
+        T(a, b, c) = (c, a + b)
+    \]
+    \[
+        A = \begin{bmatrix}
+            T(\vec{e_1}) & T(\vec{e_2}) & T(\vec{e_3})
+        \end{bmatrix}
+    \]
+    \[
+        A = \begin{bmatrix}
+            T(1, 0, 0) & T(0, 1, 0) & T(0, 0, 1)
+        \end{bmatrix}
+    \]
+    \[
+        =A = \begin{bmatrix}
+            0 & 1 & 0\\
+            1 & 1 & 0
+        \end{bmatrix}
+    \]
+    \[
+        A \cdot \begin{bmatrix}
+            a\\
+            b\\
+            c
+        \end{bmatrix}
+        = \begin{bmatrix}
+            0 & 1 & 0\\
+            1 & 1 & 0
+        \end{bmatrix}
+        \begin{bmatrix}
+            a\\
+            b\\
+            c
+        \end{bmatrix}
+    \]
+    \[
+        \begin{bmatrix}
+            c\\
+            a + b
+        \end{bmatrix}
+    \]
+    \[
+        \boxed{= (c, a + b)}
+    \]
+    
+
+    
+}
 \newpage
