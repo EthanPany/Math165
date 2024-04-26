@@ -15,6 +15,20 @@
 
 \subsection{Chapter 9.1: First Order Linear Systems}
 
+
+\[
+    \begin{bmatrix}
+        x_1'(t) = a_{11}(t)x_1(t) + a_{12}(t)x_2(t) + \cdots + a_{1n}(t)x_n(t) + b_1(t) \\
+        x_2'(t) = a_{21}(t)x_1(t) + a_{22}(t)x_2(t) + \cdots + a_{2n}(t)x_n(t) + b_2(t) \\
+        \cdots \\
+        x_n'(t) = a_{n1}(t)x_1(t) + a_{n2}(t)x_2(t) + \cdots + a_{nn}(t)x_n(t) + b_n(t) \\
+    \end{bmatrix}
+\]
+The $b_i$ is the consists of the non-homogenous part.
+If $b_i (t) = 0$, the system is homogenous. 
+
+
+
 An example of the first-order linear system is:
 
 \ex{
@@ -28,28 +42,28 @@ An example of the first-order linear system is:
         x_1(0) = 1, x_2(0) = 0
     \]
 }
-
-If $b_i (t) = 0$, the system is homogenous. 
+The \textbf{Initial value} here is $x_1(0) = 1, x_2(0) = 0$.
 
 A \textbf{solution} is an ordered n-tuple of functions $x_1(t), x_2(t), \dots, x_n(t)$ that satisfies the system of equations.
 
+The solution will be in the form of: 
 \ex{
+    % \[
+    %     x_1 ' = x_1 + 2x_2
+    % \]
+    % \[
+    %     x_2 ' = 2x_1 + 2x_2
+    % \]
+    % \[
+    %     x_1(0) = 1, x_2(0) = 0
+    % \]
     \[
-        x_1 ' = x_1 + 2x_2
+        x_1(t) = \text{Some function}, x_2(t) = \text{Some function}
     \]
-    \[
-        x_2 ' = 2x_1 + 2x_2
-    \]
-    \[
-        x_1(0) = 1, x_2(0) = 0
-    \]
-    \[
-        x_1(t) = e^t, x_2(t) = e^t
-    \]
-    is a solution. 
 }
+Which is a vector of functions. 
 
-There's a trick to solving the 2 by 2 system, however, we are going to skip it. 
+There's a clever trick to solving the 2 by 2 system using the derivative, however, it is not that fast and no one use it in the exam so we are going to skip it. 
 
 
 \rmkb{
@@ -102,6 +116,14 @@ There's a trick to solving the 2 by 2 system, however, we are going to skip it.
     %     \end{bmatrix}
 
     % \]
+    \[
+        A(t) = \begin{bmatrix}
+            a_{11}(t) & a_{12}(t) & \cdots & a_{1n}(t) \\
+            a_{21}(t) & a_{22}(t) & \cdots & a_{2n}(t) \\
+            \cdots & \cdots & \cdots & \cdots \\
+            a_{n1}(t) & a_{n2}(t) & \cdots & a_{nn}(t)
+        \end{bmatrix}
+    \]
     Coefficient matrix: \\
     \[
         \vec{b}(t) = \begin{bmatrix}
@@ -117,6 +139,9 @@ There's a trick to solving the 2 by 2 system, however, we are going to skip it.
 \thmr{}{}{
     $V_n(I)$ is a column vector of $n$ functions defined on an interval $I$.
 }
+
+\newpage
+
 \ex{
     \[
         \begin{bmatrix}
@@ -230,7 +255,7 @@ And we are going to have enough solutions to form a basis for the solution space
     is a solution to the homogenous system $\vec{x}'(t) = A\vec{x}(t)$.
 
 }
-
+\newpage
 
 \ex{
     \[
@@ -332,6 +357,7 @@ And we are going to have enough solutions to form a basis for the solution space
     \]
 
 }
+
 
 \ex{
     \[

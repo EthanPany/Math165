@@ -1,29 +1,243 @@
-\section{Lecture 18 \& 19: }
+\section{Lecture 19: Kernal Range and Eigenvalues}
 \rmk{
     This lecture covers: 
     \begin{itemize}
-        \item 6.1 Definition of Linear Transformations
-        \item 6.2 Transformations of $\mathbb{R}^2$
-        \item 6.3 The Kernel and Range of a Linear Transformation
+        \item 7.2 The Results for Eigenvalues and Eigenvectors
     \end{itemize}
 }
 
-\section{The definition of Eigenvalues}
-\begin{definition}
-    A \textbf{linear transformation} is a function $T: V \to W$ such that 
-    \begin{enumerate}
-        \item $T(u + v) = T(u) + T(v)$ for all $u, v \in V$
-        \item $T(cu) = cT(u)$ for all $u \in V$ and $c \in \mathbb{R}$
-    \end{enumerate}
-\end{definition}
+
+\subsection{Eigenvalues and Eigenvectors}
+\defn{Eigenvalues}{
+    Let $A$ be an $n \times n$ matrix. A scalar $\lambda$ is called an \textbf{eigenvalue} of $A$ if there exists a nontrivial (non-zero) vector $\vec{x}$ such that 
+    \[A\vec{x} = \lambda \vec{x}\]
+    The corresponding vector $\vec{x}$ is called an \textbf{eigenvector} of $A$.
+}
+
+The eigenvalue $\lambda$ will have infinitely many corresponding eigenvectors $\vec{v}$ that satisfy: 
+\begin{enumerate}
+    \item $\vec{v} \neq \vec{0}$
+    \item $A\vec{v} = \lambda \vec{v}$
+\end{enumerate}
+
+Notice that the $\vec{x}$ and $\vec{v}$ here are interchangeable.
+
+\defn{Characteristic Polynomials}{
+    The characteristic polynomial of an $n \times n$ matrix $A$ is defined as 
+    \[p(\lambda) = \text{det}(A - \lambda I)\]
+    where $I$ is the $n \times n$ identity matrix. \\
+    If $\lambda_i$ is a root of the characteristic polynomial, that is $p(\lambda_i) = 0$, then $A - \lambda_iI_n$ will have a nontrivial null space. \\
+    This means there is a non-zero vector $\vec{x}$ such that $(A - \lambda_iI_n)\vec{x} = \vec{0}$. \\
+    Hence $\lambda_i$ is an eigenvalue of $A$ with corresponding eigenvector $\vec{v}_i$. \\
+    All the \textbf{nonzero} elements of the null space of $A - \lambda_iI_n$ are eigenvectors of $A$ corresponding to $\lambda_i$.
+} 
+
+
+    
+\ex{
+    Find all the eigenvalues and corresponding eigenvectors of the matrix $A$: \\
+    \[
+        A = \begin{bmatrix}
+            3 & -1 \\
+            -5 & -1
+        \end{bmatrix}
+    \]
+    \textbf{Step 1:} Find the Eigenvalues: \\
+    We start with the equation: 
+    \[A\vec{x} = \lambda \vec{x}\]
+    \[
+        = A\vec{x} - \lambda \vec{x} = \vec{0}
+    \]
+    \[
+        = (A - \lambda I)\vec{x} = \vec{0}
+    \]
+    This is a homogeneous system of equations. We can solve for $\lambda$ by finding the determinant of $A - \lambda I$ and setting it equal to zero. \\
+    \rmkb{
+        The reason this works is because we always have a solution that $\vec{x} = \vec{0}$. However, we are looking for solutions where $\vec{x} \neq \vec{0}$ (nontrivial solutions). When $\det{A-\lambda I} = 0$ it means that we have more than one solutions that make the system consistent. This means we have free variables at the end of the row reduction, which makes the matrix non-invertible and hence the determinant is zero. 
+    } \\
+    \[
+        \text{det}(A - \lambda I) = \text{det}\left(\begin{bmatrix}
+            3-\lambda & -1 \\
+            -5 & -1-\lambda
+        \end{bmatrix}\right) = 0
+    \]
+    The characteristic polynomial is:
+    \[
+        p(\lambda) = (3-\lambda)(-1-\lambda) - (-1)(-5) = \lambda^2 - 2\lambda - 8 = 0
+    \]
+    We can solve for $\lambda$ by factoring:
+    \[
+        (\lambda - 4)(\lambda + 2) = 0
+    \]
+    \[
+        \boxed{\lambda = 4, -2}
+    \]
+
+}
+
+
+\ex{
+    \textbf{Step 2:} Find the Eigenvectors: \\
+    We plugin the eigenvalues into the equation $(A - \lambda I)\vec{x} = \vec{0}$ to find the eigenvectors. \\
+    For $\lambda = 4$: \\
+    \[
+        A - 4I = \begin{bmatrix}
+            -1 & -1 \\
+            -5 & -5
+        \end{bmatrix}
+    \]
+    \[
+        \begin{bmatrix}
+            -1 & -1 \\
+            -5 & -5
+        \end{bmatrix} \begin{bmatrix}
+            x_1 \\
+            x_2
+        \end{bmatrix} = \begin{bmatrix}
+            0 \\
+            0
+        \end{bmatrix}
+    \]
+    \[
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                1 & 1 & 0 \\
+                0 & 0 & 0
+            \end{array}
+        \end{bmatrix}
+    \]
+    \rmkb{
+        Notice that if the second row can not be reduced to all zeros, that means you made a mistake in the previous steps.
+    }
+    \[
+        x_1 = -x_2
+    \]
+    Let $x_2 = 1$, then $x_1 = -1$. \\
+    The eigenvector corresponding to $\lambda = 4$ is:
+    \[
+        \boxed{\begin{bmatrix}
+            -1 \\
+            1
+        \end{bmatrix}}
+    \]
+    For $\lambda = -2$: \\
+
+    \[
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                5 & -1 & 0 \\
+                0 & 0 & 0
+            \end{array}
+        \end{bmatrix}
+    \]
+    \[
+        x_1 = \frac{1}{5}x_2
+    \]
+    Let $x_2 = 5$, then $x_1 = 1$. \\
+    The eigenvector corresponding to $\lambda = -2$ is:
+    \[
+        \boxed{\begin{bmatrix}
+            1 \\
+            5
+        \end{bmatrix}}
+    \]
+    \rmkb{
+        Notice that the eigenvectors are not unique. We can scale the eigenvectors by any scalar and they will still be eigenvectors. In other words, for each eigenvalue, there are infinitely many eigenvectors.
+    }
+}
+
+\subsection{Complex Eigenvalues}
+\defn{Complex Conjugate}{
+    The complex number (notation $\mathbb{C}$) have the form:
+    \[
+        z = a + bi, \text{ where } a, b \in \mathbb{R}, \text{and } i^2 = -1
+    \]
+    The \textbf{complex conjugate} of $z = a + bi$ is $a-bi$. It is denoted as $\overline{z}$.
+}
+
+\textbf{Properties of complex conjugates:}
+If $A$ is a real matrix and $\vec{v}$ is an eigenvector with eigenvalue $\lambda$ then its complex conjugate $\overline{\vec{v}}$ is also an eigenvector with eigenvalue $\overline{\lambda}$.
+Justification:
+\[
+    A\vec{v} = \lambda \vec{v} \implies A\overline{\vec{v}} = \overline{\lambda} \overline{\vec{v}}
+\]
+Consider the complex conjugate of the entire equation. Recall that taking the complex conjugate of a complex number \( z \) is denoted \( \overline{z} \), and for any complex vector \( \vec{v} \), the conjugate \( \overline{\vec{v}} \) is the vector of the conjugates of the components of \( \vec{v} \).
+
+Given \( A \vec{v} = \lambda \vec{v} \), we conjugate both sides:
+\[
+\overline{A \vec{v}} = \overline{\lambda \vec{v}}
+\]
+Since \( A \) is a real matrix, the elements of \( A \) remain unchanged when conjugated, so \( \overline{A} = A \). This applies to every component of the matrix-vector product, resulting in:
+\[
+A \overline{\vec{v}} = \overline{\lambda} \overline{\vec{v}}
+\]
+
+
+\ex{
+    (Complex eigenvalues) Find all the eigenvalues and corresponding eigenvectors of $A$. \\
+    \[
+        A = \begin{bmatrix}
+            0 & -1 \\
+            1 & 0
+        \end{bmatrix}
+    \]
+    \textbf{Step 1:} Find the Eigenvalues: \\
+    \[
+        \text{det}(A - \lambda I) = \text{det}\left(\begin{bmatrix}
+            -\lambda & -1 \\
+            1 & -\lambda
+        \end{bmatrix}\right) = \lambda^2 + 1 = 0
+    \]
+    \[
+        \lambda^2 = -1 \implies \lambda = \pm i
+    \]
+    \textbf{Step 2:} Find the Eigenvectors: \\
+    For $\lambda = i$: \\
+    \[
+        A - iI = \begin{bmatrix}
+            -i & -1 \\
+            1 & -i
+        \end{bmatrix}
+    \]
+    \[
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                -i & -1 & 0 \\
+                1 & -i & 0
+            \end{array}
+        \end{bmatrix}
+    \]
+    \[
+        x_1 = -ix_2
+    \]
+    Let $x_2 = 1$, then $x_1 = -i$. \\
+    The eigenvector corresponding to $\lambda = i$ is:
+    \[
+        \boxed{\begin{bmatrix}
+            -i \\
+            1
+        \end{bmatrix}}
+    \]
+    Using the properties of complex conjugates, we can find the eigenvector corresponding to $\lambda = -i$:
+    \[
+        \boxed{\begin{bmatrix}
+            i \\
+            1
+        \end{bmatrix}}
+    \]
 
 
 
 
+}
 
-
-
-
+\subsection{Properties and Theorems}
+\begin{itemize}
+    \item $0$ is an eigenvalue of $A$ if and only if $A$ has non-trivial null space. (So 0 can be an eigenvalue but not an eigenvector)
+    \item If $\vec{v}$ is an eigenvector of $A$ with eigenvalue $\lambda$, then $k\vec{v}$ is also an eigenvector of $A$ with eigenvalue $\lambda$ for any scalar $k \neq 0$.
+    \item If $A$ is invertible and $\vec{v}$ is an eigenvector with eigenvalue $\lambda$, then $\lambda \neq 0$ and $\vec{v}$ is an eigenvector of $A^{-1}$ with eigenvalue $\lambda^{-1}$.
+    \item If $\vec{v}$ is an eigenvector of $A$ with eigenvalue $\lambda$, then $\vec{v}$ is an eigenvector of $A^k$ with eigenvalue $\lambda^k$ for any positive integer $k$.
+\end{itemize}
 
 
 

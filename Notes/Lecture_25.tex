@@ -1,0 +1,205 @@
+\section{Lecture 25: }
+\rmk{
+    This lecture covers: 
+    \begin{itemize}
+        \item 
+    \end{itemize}
+}
+\subsection{Complex-Valued Solutions}
+\thmr{}{}{
+    Let $\vec{u}(t)$ and $\vec{v}(t)$ be real-valued vector functions. If \\
+    \[
+        \vec{w}_1(t) = \vec{u}(t) + \vec{v}(t) \quad \text{and} \quad \vec{w}_2(t) = \vec{u}(t) - \vec{v}(t)
+    \]
+    are complex conjugate solutions to $x' = Ax$ , then\\
+    \[
+        x_1(t) = \vec{u}(t) \text{and} \quad x_2(t) = \vec{v}(t)
+    \]
+    are themselves real-valued solutions to $x' = Ax$.
+}
+
+\ex{
+    Let $A = \begin{bmatrix} 0 & 2 \\ -2 & 0 \end{bmatrix}$. Find the general solution to $x' = Ax$. \\ \\
+    \textbf{Step 1: Find the Eigenvalues and Eigenvectors} \\
+    The characteristic equation is $\lambda^2 + 4 = 0$, so $\boxed{\lambda = \pm 2i}$. 
+
+    For $\lambda = 2i$, we have
+    \[
+        \begin{bmatrix} -2i & 2 \\ -2 & -2i \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+    \]
+    RREF: \\
+    \[
+        \begin{bmatrix} 
+            \begin{array}{cc|c}
+                1 & i & 0\\ 0 & 0 &0
+            \end{array}
+        
+        \end{bmatrix}
+    \]
+
+    So, $\boxed{\vec{v}_1 = \begin{bmatrix} -i \\ 1 \end{bmatrix}}$ or $\boxed{\vec{v}_2 = \begin{bmatrix} 1 \\ i \end{bmatrix}}$ is an eigenvector corresponding to $\lambda = \pm 2i$. \\
+
+    \textbf{Step 2: Find the General Solution} \\
+    The general solution is
+    \[
+        x(t) = c_1e^{2it}\begin{bmatrix} -i \\ 1 \end{bmatrix} + c_2e^{-2it}\begin{bmatrix} 1 \\ i \end{bmatrix}
+    \]
+    \[
+        = c_1\begin{bmatrix} -i\cos(2t) - \sin(2t) \\ \cos(2t) - i\sin(2t) \end{bmatrix} + c_2\begin{bmatrix} \cos(2t) - i\sin(2t) \\ i\cos(2t) - \sin(2t) \end{bmatrix}
+    \]
+    Here, we want it to be in the form of $\vec{u}(t) + i \vec{v}(t)$. So, we can rewrite the general solution as \\
+    \[
+        = \begin{bmatrix} c_1\cos(2t) + c_2\sin(2t) \\ c_2\cos(2t) - c_1\sin(2t) \end{bmatrix} + i\begin{bmatrix} c_2\cos(2t) - c_1\sin(2t) \\ c_1\cos(2t) + c_2\sin(2t) \end{bmatrix}
+    \]
+    
+    \[
+        = \begin{bmatrix} c_1\cos(2t) + c_2\sin(2t) \\ c_2\cos(2t) - c_1\sin(2t) \end{bmatrix} + i\begin{bmatrix} c_2\cos(2t) - c_1\sin(2t) \\ c_1\cos(2t) + c_2\sin(2t) \end{bmatrix}
+    \]
+
+
+
+    
+}
+
+
+
+
+
+
+
+
+\newpage
+
+\ex{
+    \textbf{Example 1:} $(D^2 + 2D +10)^2$
+    The first step is to find the order of this, which is 2 inside from $D^2$ and squared it to get $\boxed{4}$. \\
+
+    \[
+        p(r) = r^2 + 2r + 10 = 0
+    \]
+    Which doesn't obviously factor, so we check: \\
+    \[
+        b^2 - 4ac = 4 - 40 = \boxed{-36}
+    \]
+    Which is negative, so we have complex roots. \\
+    \[
+        r = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} = \frac{-2 \pm \sqrt{-36}}{2} = \frac{-2 \pm 6i}{2} =\boxed{ -1 \pm 3i}
+    \]
+
+    The multiplicity of the roots is 2 for each, so we have to use the formula: \\
+    \[
+        e^{rt} = e^{-t}(\cos(3t) \pm i\sin(3t))
+    \]
+
+    The general solution is: \\
+    \[
+        \boxed{        
+            y = c_1 e^{-t}\cos(3t) + c_2 e^{-t}(\sin(3t)) + c_3 te^{-t}(\cos(3t)) + c_4 te^{-t}(\sin(3t))
+        }    
+    \]
+}
+
+\ex{
+    \textbf{Example 2:} $y''' - y'' +y' -y = 0$ \\
+    \[
+        p(r) = r^3 - r^2 + r - 1 = 0
+    \]
+    \[
+        = r^2 (r - 1) + 1(r - 1) 
+    \]
+    \[
+        = (r +1) (r - 1)^2 = 0
+    \]
+
+    Rational root Theorem: \\
+    Trial:
+    \[
+        r = \pm 1
+    \]
+    try $r = 1$:
+    \[
+        1 - 1 + 1 - 1 = 0
+    \]
+    So, we have a root of 1. \\
+    \[
+       \boxed{ y = c_1e^t + c_2 \cos(t) + c_3 \sin(t)}
+    \]
+
+}
+
+
+\newpage
+\ex{
+    \textbf{Example 3:} $y'' + y = 6xe^x$ \\
+    $y_c$ = \text{General solution to }$y'' + y = 0$ \\
+    $y_p = \text{Trial solution} $ \\
+    $y_c$:  
+    \[
+        p(r) = r^2 + 1 = 0
+    \] 
+    \[
+        r = \pm i
+    \]
+    \[
+        y_c = c_1\cos(x) + c_2\sin(x)
+    \]
+    \[
+        y(p) = Ae^x + Bxe^x
+    \]
+    Apply $(D^2 + I) y_p$ \\
+    \[
+        D(Ae^x + Bxe^x) 
+    \]
+    \[
+        = Ae^x + Be^x + Bxe^x
+    \]
+    \[
+        = (A + B)e^x + Bxe^x
+    \]
+    \[
+        D^2(Ae^x + Bxe^x) = (A + B)e^x + Be^x + Bxe^x
+    \]
+    \[
+        = (A + B)e^x + 2Be^x + Bxe^x
+    \]
+    \[
+        y = c_1 e^t + c_2 \cos(t) + c_3 \sin(t) 
+    \]
+    \[
+        (D^2+I) y_p = (A + 2B) e^x + Bxe^x + Ae^x + Bxe^x
+    \]
+    \[
+        = (2A + 2B)e^x + 2Bxe^x
+    \]
+    \[
+        = 6xe^x
+    \]
+    \[
+        2A + 2B = 0
+    \]
+    \[
+        2B = 6
+    \]
+    \[
+        B = 3
+    \]
+    \[
+        A = -3
+    \]
+    \[
+        y = c_1 
+    \]
+
+
+
+}
+
+
+
+
+
+
+
+
+
+\newpage
