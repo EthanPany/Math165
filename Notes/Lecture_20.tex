@@ -8,17 +8,566 @@
     \end{itemize}
 }
 
+\subsection{Eigenspaces and Non-defective Matrices}
+
+\defn{Defective Matrices}{
+    A matrix is defective if it does not have a complete set of eigenvectors. \\
+    The matrix $A$ is defective if the geometric multiplicity of an eigenvalue is less than its algebraic multiplicity.
+}
+This is a common simple example that illustrate the concept of defective matrices.\\
+\ex{
+    \[
+    A = \begin{pmatrix}
+    1 & 1 \\
+    0 & 1
+    \end{pmatrix}
+    \]
+
+    Here, we can find the eigenvalues by solving the characteristic equation \(\text{det}(A - \lambda I) = 0\), where \(I\) is the identity matrix.
+
+    1. Subtract \(\lambda\) from the diagonal entries of \(A\) and set the determinant to zero:
+
+    \[
+    \begin{vmatrix}
+    1-\lambda & 1 \\
+    0 & 1-\lambda
+    \end{vmatrix} = (1-\lambda)(1-\lambda) - 0 \cdot 1 = (1-\lambda)^2 = 0
+    \]
+
+    2. Solving \((1-\lambda)^2 = 0\), we find that the only eigenvalue is \(\lambda = 1\), with algebraic multiplicity 2 (because it is a double root of the characteristic equation).
+
+    3. Next, to find the eigenvectors corresponding to \(\lambda = 1\), solve \((A - I)x = 0\):
+
+    \[
+    \begin{pmatrix}
+    0 & 1 \\
+    0 & 0
+    \end{pmatrix}
+    \begin{pmatrix}
+    x_1 \\
+    x_2
+    \end{pmatrix} = \begin{pmatrix}
+    0 \\
+    0
+    \end{pmatrix}
+    \]
+
+    This simplifies to \(0 \cdot x_1 + 1 \cdot x_2 = 0\), which implies \(x_2 = 0\). So, the eigenvectors are of the form \(\begin{pmatrix} x_1 \\ 0 \end{pmatrix}\), where \(x_1\) can be any non-zero value.
+
+    4. Thus, we have only one linearly independent eigenvector, \(\begin{pmatrix} 1 \\ 0 \end{pmatrix}\), despite having an eigenvalue with algebraic multiplicity 2. This means the geometric multiplicity of \(\lambda = 1\) is 1, which is less than its algebraic multiplicity.
+
+    Since the algebraic and geometric multiplicities do not match, the matrix \(A\) is defective and cannot be diagonalized.
+}
+\newpage
+
+
+
+\ex{
+    Find all ythe eigenvalues and eigenvectors of the matrix
+    \[
+        A = \begin{bmatrix}
+            5 & 12 & -6 \\
+            -3 & -10 & 6 \\
+            -3 & -12 & 8
+        \end{bmatrix}
+    \]
+    whose characteristic polynomial is $p(\lambda) = -{(\lambda - 2)}^2 (\lambda + 1)$.\\
+    \textbf{Solution:}
+    The eigenvalues are $\lambda_1 = 2$ and $\lambda_2 = -1$.
+    For $\lambda_1 = 2$, we have
+    \[
+        A - 2I = \begin{bmatrix}
+            \begin{array}{ccc|c}
+                3 & 12 & -6 & 0\\
+                -3 & -12 & 6 &0 \\
+                -3 & -12 & 6 &0
+            \end{array}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \begin{array}{ccc|c}
+                1 & 4 & -2 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{array}
+        \end{bmatrix}
+    \]
+    which gives us the eigenvector $x_1 = -4x_2 + 2x_3$.\\
+    \[
+        \vec{x}_1 = \begin{bmatrix}
+            -4 \\ 1 \\ 0
+        \end{bmatrix}
+        \text{ and }
+        \vec{x}_2 = \begin{bmatrix}
+            2 \\ 0 \\ 1
+        \end{bmatrix}
+    \]
+    For $\lambda_2 = -1$, we have
+    \[
+        A + I = \begin{bmatrix}
+            \begin{array}{ccc|c}
+                6 & 12 & -6 & 0\\
+                -3 & -9 & 6 &0 \\
+                -3 & -12 & 9 &0
+            \end{array}
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            \begin{array}{ccc|c}
+                3 & 6 & -3 & 0\\
+                0 & 0 & 0 & 0\\
+                0 & 0 & 0 & 0
+            \end{array}
+        \end{bmatrix}
+    \]
+
+    which gives us the eigenvector $x_1 = -2x_3$ and $x_2 = 3x_3$. \\
+    \[
+        \vec{x}_3 = \begin{bmatrix}
+            -2 \\ 0 \\ 1
+        \end{bmatrix}
+    \]
+}
+
+\newpage
+
+We can plug in the eigenvectors into the matrix to check if they are correct.\\
+
+\ex{
+    \textbf{Check: }
+    \[
+        A \vec{v} = \lambda \vec{v}
+    \]
+    For $\lambda_1 = 2$ and $\vec{v}_1 = \begin{bmatrix}
+        -4 \\ 1 \\ 0
+    \end{bmatrix}$, we have
+    \[
+        A \vec{v}_1 = \begin{bmatrix}
+            5 & 12 & -6 \\
+            -3 & -10 & 6 \\
+            -3 & -12 & 8
+        \end{bmatrix}
+        \begin{bmatrix}
+            -4 \\ 1 \\ 0
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            -8 \\ 2 \\ 0
+        \end{bmatrix}
+        = 2 \begin{bmatrix}
+            -4 \\ 1 \\ 0
+        \end{bmatrix}
+    \]
+
+    For $\lambda_2 = 2$ and $\vec{v}_2 = \begin{bmatrix}
+        2 \\ 0 \\ 1
+    \end{bmatrix}$, we have
+    \[
+        A \vec{v}_2 = \begin{bmatrix}
+            5 & 12 & -6 \\
+            -3 & -10 & 6 \\
+            -3 & -12 & 8
+        \end{bmatrix}
+        \begin{bmatrix}
+            2 \\ 0 \\ 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            4 \\ 0 \\ 2
+        \end{bmatrix}
+        = 2 \begin{bmatrix}
+            2 \\ 0 \\ 1
+        \end{bmatrix}
+    \]
 
 
 
 
 
 
+    For $\lambda_2 = -1$ and $\vec{v}_2 = \begin{bmatrix}
+        -2 \\ 0 \\ 1
+    \end{bmatrix}$, we have
+    \[
+        A \vec{v}_2 = \begin{bmatrix}
+            5 & 12 & -6 \\
+            -3 & -10 & 6 \\
+            -3 & -12 & 8
+        \end{bmatrix}
+        \begin{bmatrix}
+            -2 \\ 0 \\ 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            2 \\ 0 \\ -1
+        \end{bmatrix}
+        = -1 \begin{bmatrix}
+            -2 \\ 0 \\ 1
+        \end{bmatrix}
+    \]
+
+
+}
+
+
+\defn{Algebraic Multiplicity}{
+    Any polynomial with coefficients in $\mathbb{R}$ can be written as follows: \\
+    \[
+        p(t) = a(t-r_1)^{m_1} (t-r_2)^{m_2} \cdots (t-r_k)^{m_k}
+    \]
+    The $r_i \in \mathbb{C}$ are the distinct roots of the polynomial. The exponent $m_i$ is the \textbf{algebraic multiplicity} of the root $r_i$. 
+}
+
+\ex{
+    In the previous example, the algebraic multiplicity of $\lambda_1 = 2$ is 2 and the algebraic multiplicity of $\lambda_2 = -1$ is 1.
+}
+
+\defn{Eigenspaces}{
+    Let $A \in M_n(\mathbb{R})$ . For any given Eigenvalues $\lambda_i$, define the \textbf{Eigenspace} associate to each $\lambda_i$ as follows:
+    \[
+        E_i = \{ x \in \mathbb{C}^n | A \vec{v} = \lambda_i \vec{v} \} = \text{Null}(A - \lambda_i I_n) = \{\text{all Eigenvectors of } \lambda_i\} \cup \{0_n\}
+    \]
+    The dimension $\dim(E_i) = n_i$ is called the \textbf{geometric multiplicity} of $\lambda_i$. 
+}
+\ex{
+    In the previous example, the geometric multiplicity of $\lambda_1 = 2$ is 2 and the geometric multiplicity of $\lambda_2 = -1$ is 1.
+}
+
+\rmkb{
+    % ### Algebraic Multiplicity
+    % The **algebraic multiplicity** of an eigenvalue is the number of times that eigenvalue appears as a root of the characteristic polynomial of the matrix. In other words, it's the exponent of the eigenvalue in the factorized form of the characteristic polynomial.
+
+    % For example, if the characteristic polynomial is \((\lambda - 1)^2(\lambda + 2)\), the eigenvalue \(\lambda = 1\) has an algebraic multiplicity of 2 because it appears twice as a root (i.e., it's squared in the polynomial).
+
+    % ### Geometric Multiplicity
+    % The **geometric multiplicity** of an eigenvalue is the number of linearly independent eigenvectors associated with that eigenvalue. This is technically the dimension of the eigenspace corresponding to the eigenvalue. The eigenspace is the null space of the matrix \(A - \lambda I\), where \(A\) is the matrix in question, \(\lambda\) is the eigenvalue, and \(I\) is the identity matrix of the same size as \(A\).
+
+    % For the same example, if for \(\lambda = 1\), we can only find one linearly independent eigenvector despite the algebraic multiplicity being 2, then the geometric multiplicity of \(\lambda = 1\) is 1.
+
+    % ### Relationship and Properties
+    % - The geometric multiplicity of an eigenvalue is always less than or equal to its algebraic multiplicity.
+    % - If the geometric multiplicity of every eigenvalue equals its algebraic multiplicity, the matrix is said to be diagonalizable, meaning there exists a basis of eigenvectors for the matrix, and the matrix can be expressed as \(PDP^{-1}\) where \(D\) is a diagonal matrix of eigenvalues and \(P\) is the matrix whose columns are the corresponding eigenvectors.
+
+    \textbf{Algebraic Multiplicity} \\
+    The \textbf{algebraic multiplicity} of an eigenvalue is the number of times that eigenvalue appears as a root of the characteristic polynomial of the matrix. In other words, it's the exponent of the eigenvalue in the factorized form of the characteristic polynomial. \\
+
+    For example, if the characteristic polynomial is $(\lambda - 1)^2(\lambda + 2)$, the eigenvalue $\lambda = 1$ has an algebraic multiplicity of 2 because it appears twice as a root (i.e., it's squared in the polynomial). \\
+
+    \textbf{Geometric Multiplicity} \\
+    The \textbf{geometric multiplicity} of an eigenvalue is the number of linearly independent eigenvectors associated with that eigenvalue. This is technically the dimension of the eigenspace corresponding to the eigenvalue. The eigenspace is the null space of the matrix $A - \lambda I$, where $A$ is the matrix in question, $\lambda$ is the eigenvalue, and $I$ is the identity matrix of the same size as $A$. \\
+
+    For the same example, if for $\lambda = 1$, we can only find one linearly independent eigenvector despite the algebraic multiplicity being 2, then the geometric multiplicity of $\lambda = 1$ is 1. \\
+
+    \textbf{Relationship and Properties} 
+    \begin{enumerate}
+        \item The geometric multiplicity of an eigenvalue is always less than or equal to its algebraic multiplicity.
+        \item If the geometric multiplicity of every eigenvalue equals its algebraic multiplicity, the matrix is said to be diagonalizable, meaning there exists a basis of eigenvectors for the matrix, and the matrix can be expressed as $PDP^{-1}$ where $D$ is a diagonal matrix of eigenvalues and $P$ is the matrix whose columns are the corresponding eigenvectors.
+    \end{enumerate}
+}
+
+
+\thmr{}{}{
+    Let $\lambda_i$ be an eigenvalue of $A$ of algebraic multiplicity $m_i$, and $E_i$ the corresponding eigenspace. Then: 
+    \begin{enumerate}
+        \item $E_i$ is a subspace of $\mathbb{C}^n$.
+        \item $\dim(E_i) \leq m_i$.
+    \end{enumerate}
+}
+
+\thmr{The independence of Eigenvectors}{}{
+    \begin{enumerate}
+        \item Eigenvectors corresponding to distinct eigenvalues are linearly independent.
+        \item The union of linearly independent elements of \textbf{distinct} eigenspace $E_1, E_2, \cdots, E_k$ is a linearly independent set. (This means if we take the union of basis of distinct eigenspaces, we get an independent set.)
+    \end{enumerate}
+}
+
+\fact{
+    \begin{enumerate}
+        \item If $A$ has $n$ distinct eigenvalues, then $A$ is non-defective.
+        \item $A$ is \textbf{non-defective} if and only if the \textbf{geometric multiplicity} of each eigenvalue equals its \textbf{algebraic multiplicity}. (That way, the sum of the dimensions of the eigenspaces equals $n$.)
+    \end{enumerate}
+}
+
+\ex{
+    1. Show the following matrix is non-defective:
+    \[
+        A = \begin{bmatrix}
+            -1 & -3 \\
+            2 & 4
+        \end{bmatrix}
+    \]
+    \textbf{Step 1:} Find the Eigenvalues \\
+    The characteristic polynomial is $\lambda^2 - 3 \lambda +2$. The eigenvalues are $\lambda_1 = 1$ and $\lambda_2 = 2$.\\
+    \textbf{Step 2:} Find the Eigenvectors \\
+    For $\lambda_1 = 1$, we have
+    \[
+        A - I = \begin{bmatrix}
+            -2 & -3 \\
+            2 & 3
+        \end{bmatrix}
+    \]
+    which gives us the eigenvector $2 x_1 = -3x_2$.\\
+    \[
+        \vec{x}_1 = \begin{bmatrix}
+            -3 \\ 2
+        \end{bmatrix}
+    \]
+    For $\lambda_2 = 2$, we have
+    \[
+        A - 2I = \begin{bmatrix}
+            -3 & -3 \\
+            2 & 2
+        \end{bmatrix}
+    \]
+    which gives us the eigenvector $x_1 = -x_2$.\\
+    \[
+        \vec{x}_2 = \begin{bmatrix}
+            -1 \\ 1
+        \end{bmatrix}
+    \]
+    \textbf{Step 3:} Check the Independence of Eigenvectors \\
+    The eigenvectors corresponding to different eigenvalues are always linearly independent. Here, the eigenvectors are:
+    \[
+        \begin{bmatrix}
+            -3 \\ 2
+        \end{bmatrix}, 
+        \begin{bmatrix}
+            -1 \\ 1
+        \end{bmatrix}
+    \]
+    \textbf{Conclusion}
+    For $\lambda_1 = 1$, we have algebraic multiplicity 1 and geometric multiplicity 1. For $\lambda_2 = 2$, we have algebraic multiplicity 1 and geometric multiplicity 1. Since the geometric multiplicity of each eigenvalue equals its algebraic multiplicity, the matrix $A$ is non-defective.
 
 
 
 
+}
 
+\ex{
+    2. Find a basis of eigenvectors of $A$ for $\mathbb{R}^2$ \\
+    \textbf{Forming a Basis: }\\
+    \[
+        P = \begin{bmatrix}
+            -3 & -1 \\
+            2 & 1
+        \end{bmatrix}
+    \]
+    The determinant of $P$ is: 
+    \[
+        \det(P) = -3 \cdot 1 - (-1) \cdot 2 = -3 + 2 = -1
+    \]
+    Since the determinant is non-zero, the vectors are linearly independent. \\
+    \textbf{Spanning: }\\
+    \[
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                -3 & -1 & x\\ 
+                2 & 1 & y
+            \end{array}
+        \end{bmatrix}
+    \]
+    RREF: 
+    \[
+        \begin{bmatrix}
+            \begin{array}{cc|c}
+                1 & 0 & -x-y\\
+                0 & 1 & 2x+3y
+            \end{array}
+        \end{bmatrix}
+    \]
+    The determinant is non-zero, so the vectors span $\mathbb{R}^2$. Thus, the vectors form a basis of $\mathbb{R}^2$.
+}
+
+
+
+\ex{
+    3. Let $\vec{v} = (-2,1) \in \mathbb{R}^2$ with the standard basis. Express $\vec{v}$ as a linear combination of the eigenvectors of $A$. \\
+
+    \textbf{Solution: }\\
+    \[
+        \begin{bmatrix}
+            -2 \\ 1
+        \end{bmatrix}
+        =
+        c_1 \begin{bmatrix}
+            -3 \\ 2
+        \end{bmatrix}
+        +
+        c_2 \begin{bmatrix}
+            -1 \\ 1
+        \end{bmatrix}
+    \]
+    Solving the system of equations, we get $c_1 = 1$ and $c_2 = -1$. Thus, $\vec{v}$ can be expressed as a linear combination of the eigenvectors of $A$.
+
+}
+
+\ex{
+    4. Find $A^2 \vec{v}$ and $A^{-1}\vec{v}$. \\
+
+
+    \[
+    A = \begin{bmatrix} -1 & -3 \\ 2 & 4 \end{bmatrix}
+    \]
+
+    % and a vector \(\vec{v} = \begin{bmatrix} x \\ y \end{bmatrix}\).
+
+    and a vector $\vec{v} = \begin{bmatrix} x \\ y \end{bmatrix}$.
+
+    % ### Step 2: \(A^2 \vec{v}\)
+
+    \textbf{Step 1: $A^2 \vec{v}$} \\
+
+    % Now, compute \(A^2 \vec{v}\) by multiplying \(A\) again by \(A \vec{v}\):
+
+    Now, compute $A^2 \vec{v}$ by multiplying $A$ again by $A \vec{v}$:
+
+    \[
+    A^2 \vec{v} = A(A \vec{v}) = \begin{bmatrix} -1 & -3 \\ 2 & 4 \end{bmatrix} \begin{bmatrix} -x - 3y \\ 2x + 4y \end{bmatrix}
+    \]
+
+    Simplifying the multiplication:
+
+    \[
+    A^2 \vec{v} = \begin{bmatrix} (-1)(-x - 3y) + (-3)(2x + 4y) \\ (2)(-x - 3y) + (4)(2x + 4y) \end{bmatrix}
+    \]
+    \[
+    A^2 \vec{v} = \begin{bmatrix} x + 3y - 6x - 12y \\ -2x - 6y + 8x + 16y \end{bmatrix}
+    \]
+    \[
+    A^2 \vec{v} = \begin{bmatrix} -5x - 9y \\ 6x + 10y \end{bmatrix}
+    \]
+
+    % ### Step 3: \(A^{-1} \vec{v}\)
+
+    \textbf{Step 2: $A^{-1} \vec{v}$} \\
+
+    % To compute \(A^{-1} \vec{v}\), we first need to find the inverse of the matrix \(A\).
+
+    To compute $A^{-1} \vec{v}$, we first need to find the inverse of the matrix $A$.
+
+    % #### Inverse of a 2x2 Matrix
+
+    Inverse of a $2 \times 2$ Matrix \\
+
+    % For a 2x2 matrix \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), the inverse is:
+
+    For a $2 \times 2$ matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, the inverse is:
+
+    \[
+    A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}
+    \]
+
+    Applying this formula:
+
+    \[
+    A^{-1} = \frac{1}{(-1)(4) - (-3)(2)} \begin{bmatrix} 4 & 3 \\ -2 & -1 \end{bmatrix}
+    \]
+    \[
+    A^{-1} = \frac{1}{-4 + 6} \begin{bmatrix} 4 & 3 \\ -2 & -1 \end{bmatrix}
+    \]
+    \[
+    A^{-1} = \frac{1}{2} \begin{bmatrix} 4 & 3 \\ -2 & -1 \end{bmatrix}
+    \]
+    \[
+    A^{-1} = \begin{bmatrix} 2 & \frac{3}{2} \\ -1 & -\frac{1}{2} \end{bmatrix}
+    \]
+
+    % #### Multiplying \(A^{-1} \vec{v}\)
+
+    % Now compute \(A^{-1} \vec{v}\):
+
+    Now compute $A^{-1} \vec{v}$:
+
+    \[
+    A^{-1} \vec{v} = \begin{bmatrix} 2 & \frac{3}{2} \\ -1 & -\frac{1}{2} \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}
+    \]
+    \[
+    A^{-1} \vec{v} = \begin{bmatrix} 2x + \frac{3}{2}y \\ -x - \frac{1}{2}y \end{bmatrix}
+    \]
+
+    
+}
+
+\ex{
+    Example: Is the following matrix defective? Find a basis for the span of its eigenvectors. \\
+    \[
+        \begin{bmatrix}
+            3 & 0 & 0 \\
+            0 & 2 & -1 \\
+            1 & -1 & 2
+        \end{bmatrix}
+    \]
+    \textbf{Step 1: } find the Eigenvalues \\
+    \[
+        | A - \lambda I | = \begin{vmatrix}
+            3-\lambda & 0 & 0 \\
+            0 & 2-\lambda & -1 \\
+            1 & -1 & 2-\lambda
+        \end{vmatrix}
+    \]
+    \[
+        (3 - \lambda) ((2 - \lambda)(2 - \lambda) - 1 )= 0
+    \]
+    \[
+        \lambda_1 = 3 (Mul: 2), \lambda_2 = 1 (Mul: 1)
+    \]
+    \textbf{Step 2: } Find the Eigenvectors \\
+    For $\lambda_1 = 3$, we have
+    \[
+        A - 3I = \begin{bmatrix}
+            0 & 0 & 0 \\
+            0 & -1 & -1 \\
+            1 & -1 & -1
+        \end{bmatrix}
+    \]
+    \[
+        x_1 = x_2 + x_3
+    \]
+    \[
+        x_2 = -x_3
+    \]
+    let $x_2$ = t, then $x_3 = -t$, $x_1 = 0$
+    \[
+        \begin{bmatrix}
+            x_1 \\ x_2 \\ x_3
+        \end{bmatrix}
+        =
+        t \begin{bmatrix}
+            0 \\ -1 \\ 1
+        \end{bmatrix}
+    \]
+    For $\lambda_2 = 1$, we have
+    \[
+        A - I = \begin{bmatrix}
+            2 & 0 & 0 \\
+            0 & 1 & -1 \\
+            1 & -1 & 1
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+            1 & 0 & 0 \\
+            0 & 1 & -1 \\
+            0 & 0 & 0
+        \end{bmatrix}
+    \]
+    \[
+        x_1 = 0
+    \]
+    \[
+        x_2 = x_3
+    \]
+    let $x_2 = t$, then $x_3 = t$
+    \[
+        \begin{bmatrix}
+            x_1 \\ x_2 \\ x_3
+        \end{bmatrix}
+        =
+        t \begin{bmatrix}
+            0 \\ 1 \\ 1
+        \end{bmatrix}
+    \]
+    We can actually stop by $\lambda_1$ since we only find one eigenvector but the algebraic multiplicity is 2. Thus, the matrix is defective.
+}
 
 
 

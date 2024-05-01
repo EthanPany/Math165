@@ -1,0 +1,108 @@
+\section{S15 FQ6}
+% Let M2×2(R) be the vector space of 2×2 real matrices. Consider the linear
+% transformation T : M2×2(R) → M2×2(R) defined by
+% "a b#! "a+d b−c#
+% T cd =a−cb+d.
+
+Let $M_{2 \times 2}(\mathbb{R})$ be the vector space of $2 \times 2$ real matrices. Consider the linear transformation $T : M_{2 \times 2}(\mathbb{R}) \to M_{2 \times 2}(\mathbb{R})$ defined by
+\[
+    T \begin{pmatrix}
+        \begin{bmatrix}
+            a & b \\
+            c & d
+        \end{bmatrix}
+    \end{pmatrix}
+     = \begin{bmatrix}
+        a + d & b - c \\
+        a - c & b + d
+    \end{bmatrix}.
+\]
+
+\textbf{Kernel:} 
+
+\[
+    a+d = 0 \quad b-c = 0 \quad a-c = 0 \quad b+d = 0
+\]
+\[
+    a = c = b = -d
+\]
+
+Therefore, the basis for the kernel is: 
+\[
+    \begin{bmatrix}
+        1 & 1 \\
+        1 & -1
+    \end{bmatrix}
+\]
+
+So the nullity of $T$ is 1.
+
+
+\textbf{Range: }
+
+\[
+    \begin{bmatrix}
+        a + d & b - c \\
+        a - c & b + d
+    \end{bmatrix}
+    = a \begin{bmatrix}
+        1 & 0 \\
+        1 & 0
+    \end{bmatrix}
+    + b \begin{bmatrix}
+        0 & 1 \\
+        0 & 1
+    \end{bmatrix}
+    + c \begin{bmatrix}
+        0 & -1 \\
+        -1 & 0
+    \end{bmatrix}
+    + d \begin{bmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{bmatrix}
+\]
+
+However, these for vectors are not linearly independent: \\
+\[
+    \begin{bmatrix}
+        1 & 0 \\
+        0 & 1
+    \end{bmatrix}
+    =
+    \begin{bmatrix}
+        1 & 0 \\
+        1 & 0
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0 & 1 \\
+        0 & 1
+    \end{bmatrix}
+    +
+    \begin{bmatrix}
+        0 & -1 \\
+        -1 & 0
+    \end{bmatrix}
+\]
+
+Therefore, the basis for the range is:
+\[
+    \begin{bmatrix}
+        1 & 0 \\
+        1 & 0
+    \end{bmatrix}
+    \quad
+    \begin{bmatrix}
+        0 & 1 \\
+        0 & 1
+    \end{bmatrix}
+    \quad
+    \begin{bmatrix}
+        0 & -1 \\
+        -1 & 0
+    \end{bmatrix}
+\]
+and the rank of $T$ is 3.\\
+\textbf{Conclusion:}
+This aligned with the Rank-Nullity Theorem, as the rank of $T$ is 3 the nullity is 1, and the sum of the rank and nullity is 4, which is the dimension of the domain of $T$.
