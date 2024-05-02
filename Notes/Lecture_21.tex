@@ -7,6 +7,314 @@
     \end{itemize}
 }
 
+\subsection{General Theory of Linear Differential Equations}
+\defn{Linear Differential Equation}{
+    A linear Differential Equation is an equation of the form
+    \[
+        y^{(n)} + \cdots + a_{n-1} (x) y' + a_n(x)y = F(x)
+    \]
+}
+
+\defn{Homogeneous equation}{
+    We have \textbf{Homogeneous equation} $F(x) = 0$ and \textbf{Non-homogeneous equation} $F(x) \neq 0$
+}
+
+\fact{
+    The Differential operator $D$ is a linear Transformations
+    \[
+        D: C^1 (\mathbb{R}) \to C(\mathbb{R})
+    \]
+    given by $D(f) = y'$, and we extapolated to higher order derivatives. We define $L:C^n \mathbb{(R)} \to C(\mathbb{R})$:
+    \[
+        L = D^n + a_1(x)D^{n-1} + \cdots + a_{n-1}(x)D + a_n(x)I
+    \]
+    called the differential operator of order $n$. (the book leaves out the $I$ term)
+}
+
+\ex{
+    % Consider y00 2y0 + exy = 0. Then a function y is a solution if and only if y satisfies Ly = 0, where L =.
+    Consider $y'' + 2y' + e^x y = 0$. Then a function $y$ is a solution if and only if $y$ satisfies $Ly = 0$, where
+    \[
+        L =  D^2 + 2D + e^x I
+    \]
+    \[
+        \text{Solution Set} = \{y | L(y) = 0\} = \ker(L)
+    \]
+    The solution set looks like this: \\
+    If $y^{(n)} + a_{n-1}y^{(n-1)} + \cdots + a_1y' + a_0y = 0$  is a homogeneous linear differential equation of order $n$, then $y = c_1y_1 + \cdots + c_ny_n$ is a general solution, where $y_1, \cdots, y_n$ are linearly independent solutions.
+
+}
+
+\thmr{}{6.1.3}{
+    \textbf{The set of solutions of a homogeneous linear differential equation of order $n$ is a vector space of dimension $n$}. It's the kernel of the linear map $L$. We call it the \textbf{solution space}.
+}
+% Any n linearly independent solutions y1 . . . , yn form a basis of the solution space. Every solution y can be expressed as a linear combination of basis vectors
+% y = c1y1 + · · · + cnyn.
+% The above expression is still called the general solution to the homogeneous equation.
+
+Any $n$ linearly independent solutions $y_1, \cdots, y_n$ form a basis of the solution space. Every solution $y$ can be expressed as a linear combination of basis vectors
+\[
+    y = c_1y_1 + \cdots + c_ny_n
+\]
+The above expression is still called the general solution to the homogeneous equation.\\
+\ex{
+    Note that both $y_1 = \cos x$ and $y_2 = \sin x$ satisfy $y'' + y = 0$. Now we add information from linear algebra:
+    \begin{itemize}
+        \item We are talking about function spaces, so the vectors are functions (and the functions are vectors.)
+        \item $\{\cos x, \sin x\}$ is independent. (How can we show this?) - Wronskian
+        \item Any 2 independent functions in a 2-dimensional function space constitute a basis for the space.
+        \item Any function in the space is a linear combination of basis vectors.
+    \end{itemize}
+    So we get the general solution, $y = c_1 \cos x + c_2 \sin x$. All solutions have this form.
+}
+\ex{
+    Homogeneous, non-constant coefficients: Using trial solutions of the form $y = x^r$, find a basis for the solution space of
+    \[
+        2x^2y'' + 5xy' + y = 0
+    \]
+    on the interval $x > 0$ and the general solution.
+
+    Trail solution: $y = x^r$ \\
+    Goal: Figure out r \\
+    Order: 2 \\
+    Substitute $y = x^r$ into the equation:
+    \[
+        y' = rx^{r-1} \quad y'' = r(r-1)x^{r-2}
+    \]
+    \[
+        2x^2r(r-1)x^{r-2} + 5xrx^{r-1} + x^r = 0
+    \]
+    \[
+        2r(r-1)x^r + 5rx^r + x^r = 0
+    \]
+    \[
+        x^r(2r^2 + 3r + 1) = 0
+    \]
+    \[
+        (2r + 1)(r + 1) = 0
+    \]
+    \[
+        r = -1/2, -1
+    \]
+    \[
+        y_1 = x^{-1/2}, \quad y_2 = x^{-1}
+    \]
+    \[
+        \boxed{y = c_1x^{-1/2} + c_2x^{-1}} \quad \text{General Solution}
+    \]
+    \rmkb{
+        Note that this is a very specific case that shows when the sum of terms of $L$ is in the form of $c_ix^iD^i$.
+    }
+}
+
+
+\subsection{Constant Coefficient Homogeneous Linear Differential Equations}
+
+We build up a technique for solving order $n$ linear homogeneous diffeqs with constant coefficients.
+\begin{enumerate}
+    \item We start small by letting $L = D - aI$. Then $L(y) = y' - ay = 0$ has general solution $y = ce^{at}$.
+    \item When $L$ has the form $L = (D - aI)(D - bI)$, the factors commute.
+    \item If $y$ is a solution to $(D - a_iI)$, then
+    \[
+        (D - a_1I)(D - a_2I) \cdots (D - a_iI) \cdots (D - a_nI)y = 0,
+    \]
+    because the factors commute.
+    \item Since the solution space is closed under addition and scalar multiplication, linear combinations of solutions to each factor are again solutions.
+    \item We’ll call $p(r) = (r - a_1)(r - a_2) \cdots (r - a_n)$ the auxiliary polynomial.
+\end{enumerate}
+
+
+
+\subsubsection{Case 1: Distinct Real Roots}
+\[
+    p(r) = (r - a_1)(r - a_2) \cdots (r - a_n)
+\]
+\fact{
+    $y_1 = e^{r_1x}, \ldots, y_n = e^{r_nx}$ are linearly independent solutions to $L(y) = 0$.
+}
+
+\thmr{More about Wronskian: }{}{
+
+    Let $y_1, y_2, \ldots, y_n$ be solutions to the regular $n$-th order differential equation $Ly = 0$ on the interval $I$, and let $W$ denote their Wronskian. If $W(x_0) = 0$ at some point $x_0 \in I$, then $\{y_1, y_2, \ldots, y_n\}$ is linearly dependent on $I$. \\
+
+    So, when the functions of interest are solutions to $Ly = 0$, \textbf{the Wronskian completely determines the independence of the functions}.
+
+}
+
+The general solution to the differential equation is
+\[
+    y = c_1e^{r_1x} + c_2e^{r_2x} + \cdots + c_ne^{r_nx}
+\]
+We use \textbf{initial conditions} to find the constants $c_1, c_2, \ldots, c_n$.
+
+\ex{
+    Solve the initial value problem: 
+    \[
+        y''-3y'-4y=0, \quad y(0)= 0 \quad y'(0) = 2
+    \]
+    \textbf{Step 1:} Find the general solution to the differential equation. \\
+    We first write the Differential Equation in the form $L(y) = 0$:
+    \[
+        D^2 - 3D - 4I = 0
+    \]
+    \rmkb{
+        Another way to think of this is to let $y = e^{rt}$.
+    }
+    The characteristic polynomial is
+    \[
+        P(r) = r^2 - 3r - 4 = (r - 4)(r + 1) = 0
+    \]
+    We set $P(r) = 0$ to find the root. The root is 
+    \[
+        r_1 = 4, \quad r_2 = -1
+    \]
+    each with multiplicity 1. So the general solution is
+    \[
+        y = c_1e^{4t} + c_2e^{-t}
+    \]
+    \textbf{Step 2:} Use the initial conditions to find the constants $c_1$ and $c_2$. \\
+    We have $y(0) = 0$ and $y'(0) = 2$. We substitute these into the general solution:
+    \[
+        y(0) = c_1 + c_2 = 0
+    \]
+    \[
+        y'(0) = 4c_1 - c_2 = 2
+    \]
+    We solve this system of equations to find $c_1$ and $c_2$.
+    \[
+        c_1 = \frac{2}{5}, \quad c_2 = -\frac{2}{5}
+    \]
+    \rmkb{
+        For this step, we can also write the equation into matrix form and solve it using matrix algebra. e.g. 
+        \[
+            \begin{bmatrix}
+                1 & 1 \\
+                4 & -1
+            \end{bmatrix}
+            \begin{bmatrix}
+                c_1 \\
+                c_2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                0 \\
+                2
+            \end{bmatrix}
+            =
+            \begin{bmatrix}
+                \begin{array}{cc|c}
+                    1 & 0 & \frac{2}{5} \\
+                    0 & 1 & -\frac{2}{5}
+                \end{array}
+            \end{bmatrix}
+        \]
+    }
+    So the solution to the initial value problem is
+    \[
+        \boxed{ y = \frac{2}{5}e^{4t} - \frac{2}{5}e^{-t}}
+    \]
+}
+
+
+\subsubsection{Case 2: Repeated Real Roots}
+If $p(r)$ has repeated roots (some $r_i$ has multiplicity greater than 1), then solutions of the form $e^{rit}$ are not sufficient, as we will not get $n$ independent ones.
+
+Note that $(D - aI)c_1te^{at} = c_1e^{at}$. So $(D - aI)^2(c_1te^{at} + c_2e^{at}) = 0$, and $\{e^{at}, te^{at}\}$ is an independent set.
+
+Technique: If a real root $a$ appears with multiplicity $m$, then include the term
+\[
+    c_1e^{at} + c_2te^{at} + c_3t^2e^{at} + \cdots + c_mt^{m-1}e^{at}
+\]
+in the general solution.
+\ex{
+    Find the general solution to the diffeq
+    \[
+        y^{(4)} - 2y^{(3)} + y'' = 0.
+    \]
+    \textbf{Step 1:} Find the general solution to the differential equation. 
+    \[
+        P(r) = r^4 - 2r^3 + r^2 = r^2(r^2 - 2r + 1) = r^2(r-1)^2
+    \]
+    \[
+        r_1 = 0 (m = 2), \quad r_2 = 1 (m = 2)
+    \]
+    The general solution is
+    \[
+        \boxed{y = c_1 + c_2t + c_3e^t + c_4te^t}
+    \]
+}
+
+
+
+\subsubsection{Case 3: Complex Roots}
+\defn{Euler's formula}{
+    \[
+        e^{i\theta} = \cos \theta + i\sin \theta
+    \]
+    In particular
+    \[
+        e^{ibt} = \cos(bt) + i\sin(bt) \text{, and } e^{-ibt} \text{ is the complex conjugate of } e^{ibt}
+    \]
+}
+
+Suppose the (real) auxiliary polynomial $P(r)$ has complex roots $r = a \pm bi$. Then the complex conjugate $\overline{a+ib} = a - ib$ is also a root of $P(r)$.
+\fact{
+    The two complex valued functions $e^{(a \pm ib)t} = e^{at}e^{\pm ibt} = e^{at}(\cos(bt) \pm i \sin(bt))$ are two linearly independent solutions to the differential equation.
+
+    These are complex-valued functions. We can obtain from them a pair of linearly independent, real functions. We set
+    \[
+        y_1 = \frac{e^{(a+ib)t} + e^{(a-ib)t}}{2} = e^{at}\cos(bt) \quad \text{and} \quad y_2 = \frac{e^{(a+ib)t} - e^{(a-ib)t}}{2i} = e^{at}\sin(bt).
+    \]
+    We conclude that the general real solution contains the term
+    \[
+        \boxed{c_1e^{at}\cos(bt) + c_2e^{at}\sin(bt)}
+    \]
+}
+
+\ex{
+    Solve the initial value problem $y'' - 6 y' + 25 y =0, y(0) = 0, y'(0) =1$
+    \[
+        P(r) = r^2 - 6r + 25 = (r-3)^2 + 16 = 0
+    \]
+    The roots are $r = 3 \pm 4i$. The general solution is
+    \[
+        y = c_1e^{3t}\cos(4t) + c_2e^{3t}\sin(4t)
+    \]
+    We substitute the initial conditions to find $c_1$ and $c_2$.
+    \[
+        y(0) = c_1 = 0
+    \]
+    \[
+        y'(0) = 3c_1 + 4c_2 = 1
+    \]
+    \[
+        c_2 = \frac{1}{4}
+    \]
+    So the solution to the initial value problem is
+    \[
+        \boxed{y = \frac{1}{4}e^{3t}\sin(4t)}
+    \]
+
+}
+
+\subsubsection{Case 4: Repeated Complex Roots} (Analogous to repeated real roots–multiply by powers of $x$.) \\
+Technique: If a (pair of) complex roots $a \pm ib$ appears with multiplicity $m$, then include
+\[
+    c_1e^{at}\cos(bt) + c_2e^{at}\sin(bt) + c_3te^{at}\cos(bt) + c_4te^{at}\sin(bt) + \cdots + c_{2m-1}t^{m-1}e^{at}\cos(bt) + c_{2m}t^{m-1}e^{at}\sin(bt)
+\]
+in the general solution.
+
+\newpage
+\ex{
+    Find the general solution: $(D^2 + 4)^2(D + 1)y = 0$.
+    \[
+        P(r) = (r^2 + 4)^2(r + 1) = (r^2 + 4)(r^2 + 4)(r + 1)
+    \]
+    The roots are $r = 2i (m = 2), -2i (m = 2), -1 (m = 1)$. The general solution is
+    \[
+        y = c_1\cos(2t) + c_2\sin(2t) + c_3t\cos(2t) + c_4t\sin(2t) + c_5e^{-t}
+    \]
+}
 
 
 
